@@ -7,7 +7,7 @@ export const Navbar = ({sidenavopenfun,sidenavstatus}) => {
   return (
     <div className='navbarcontainer'>
         <div className="navbarbody">
-        <i class={sidenavstatus ? "fa-solid fa-arrow-right iconrotate" : "fa-solid fa-bars"} onClick={() => {; sidenavopenfun(); }}></i>
+        <i class={sidenavstatus ? " fa-solid fa-arrow-left " : "fa-solid fa-bars"} onClick={() => {; sidenavopenfun(); }}></i>
         </div>
     </div>
   )

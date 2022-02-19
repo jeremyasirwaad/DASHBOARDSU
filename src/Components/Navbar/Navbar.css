@@ -3,6 +3,10 @@
 	height: 70px;
     display: flex;
     background-color: rgb(17, 17, 17);
+    position: fixed;
+
+    justify-content: flex-end;
+    z-index: 1;
 }
 
 .navbarbody{
@@ -22,13 +26,16 @@
     .navbarbody i{
         font-size: 22px;
         color: white;
-        transition: transform 0.3s ease-in;
+        /* transition: transform 0.3s ease-in; */
         display: flex;
         cursor: pointer;
+
     }
     
     .iconrotate{
         transform: rotateY(180deg);
+ 
+
     }
     
 }

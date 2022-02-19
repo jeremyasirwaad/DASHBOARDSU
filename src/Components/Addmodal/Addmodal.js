@@ -4,6 +4,8 @@ import { motion, AnimatePresence, animations } from "framer-motion";
 import { set, ref } from "firebase/database";
 import { db } from "../Config/fireBaseFile";
 import { uid } from "uid";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import fire from "../../Config/fireBaseFile";
 
 export const Addmodal = forwardRef((props, refm) => {
@@ -15,7 +17,10 @@ export const Addmodal = forwardRef((props, refm) => {
 	const [interest, setInterest] = useState("FullStack");
 	const [typeofjob, setTypeofjob] = useState("Internship");
 	const [whatsappgrp, setWhatsappgrp] = useState("Nasscom");
-	const [comments, setComments] = useState("");
+	const [comments, setComments] = useState(["lsadlasd", "askdasd"]);
+	const [comment, setComment] = useState([]);
+	const [completed, setCompleted] = useState(false);
+
 
 	useImperativeHandle(refm, () => {
 		return {
@@ -29,6 +34,15 @@ export const Addmodal = forwardRef((props, refm) => {
 	};
 
 	const createData = () => {
+		if(name === "" || department === "" || contactno === "+91" )
+		{
+			toast.error("Fill All the details");
+			return 0;
+		}
+		comments.push(comment);
+		const phone = 0;
+		const current = new Date();
+		const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 		const uuid = uid();
 		set(ref(db, `/${uuid}`), {
 			uuid,
@@ -40,9 +54,13 @@ export const Addmodal = forwardRef((props, refm) => {
 			typeofjob,
 			whatsappgrp,
 			comments,
+			date,
+			completed
 		});
 
 		setName("");
+		setOpen(false);
+		props.toastmanager();
 	};
 
 	return (
@@ -56,6 +74,7 @@ export const Addmodal = forwardRef((props, refm) => {
 					// style = {{ backgroundColor: "pink" }}
 					className="modalbackdrop"
 				>
+					<ToastContainer />
 					<motion.div
 						initial={{ scale: 0 }}
 						animate={{ scale: 1, transition: { duration: 0.2, delay: 0.3 } }}
@@ -178,9 +197,9 @@ export const Addmodal = forwardRef((props, refm) => {
 							<div className="landi">
 								<span>Comments</span>
 								<textarea
-									value={comments}
+									value={comment}
 									onChange={(e) => {
-										setComments(e.target.value);
+										setComment(e.target.value);
 									}}
 									className="modalcomment"
 									type="text"
@@ -189,7 +208,6 @@ export const Addmodal = forwardRef((props, refm) => {
 						</div>
 						<button
 							onClick={() => {
-								setOpen(false);
 								createData();
 							}}
 							className="modalsubbtn"

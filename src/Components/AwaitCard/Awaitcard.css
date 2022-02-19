@@ -1,0 +1,80 @@
+.awaitcard{
+    height: 210px;
+    width: 100%;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 15px;
+    position: relative;
+}
+
+.awaitinner{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.acardicons{
+    position: absolute;
+    right: 30px;
+    top: 16px;
+    width: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.acardicons2{
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    width: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.acardt1
+{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.acardbtn{
+    border: none;
+    background-color: blueviolet;
+    color: white;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+
+}
+
+
+@media only screen and (max-width:485px) {
+    .awaitcard{
+        width: 90%;
+        height: 190px;
+    }
+
+    .acardbtn{
+        font-size: 14px;
+        width: 90px;
+    }
+
+    .acardt2{
+        font-size: 14px;
+    }
+
+    .acardicons2{
+        font-size: 15px;
+    }
+}
+
+
+@media only screen and (max-width:455px) {
+    .awaitcard{
+        width: 90%;
+        height: 170px;
+    }
+}

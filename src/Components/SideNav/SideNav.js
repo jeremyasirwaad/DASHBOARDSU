@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { motion } from 'framer-motion';
 import { Addmodal } from "../Addmodal/Addmodal";
  import "./SideNav.css";
-export const SideNav = ({sidenavstatus}) => {
+export const SideNav = ({sidenavstatus, toastmanager}) => {
 
 	const modelref = useRef();
 
@@ -84,7 +84,7 @@ export const SideNav = ({sidenavstatus}) => {
 					{/* <i class="fa-solid fa-horizontal-rule"></i> */}
 				</div>
 			</div>
-			<Addmodal ref = {modelref} />
+			<Addmodal ref = {modelref} toastmanager = {toastmanager} />
 		</div>
 	);
 };

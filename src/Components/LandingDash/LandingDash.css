@@ -1,3 +1,17 @@
+.landingdashpage
+{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.containerland{
+    width: 80%;
+    /* margin: 40px; */
+    /* padding: 50px; */
+}
+
 .landinner{
     margin-top: 40px;
     font-family: 'Rubik', sans-serif;

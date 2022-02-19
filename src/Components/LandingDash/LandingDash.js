@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { Awaitoffer } from "../Awaitoffer/Awaitoffer";
+import { motion } from "framer-motion";
 import "./LandingDash.css";
 
 export const LandingDash = ({ sidenavopenfun, sidenavstatus }) => {
@@ -9,10 +11,20 @@ export const LandingDash = ({ sidenavopenfun, sidenavstatus }) => {
 					sidenavopenfun();
 				}
 			}}
+
+			className="landingdashpage"
 		>
-			<div className="container">
+			<div className="containerland" style={{marginTop: "70px"}}>
 				<div className="landinner">
 					<h3>Waiting For Suitable Offer</h3>
+					<motion.div className="modalline" initial={{ scaleX: 0 }}
+								animate={{
+									scaleX: 1,
+									transition: { delay: 0.6, duration: 0.4 },
+								}}></motion.div>
+					<div style={{width:"100%"}}>
+						<Awaitoffer/>
+					</div>
 				</div>
 			</div>
 		</div>
