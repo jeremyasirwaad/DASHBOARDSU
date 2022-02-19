@@ -3,7 +3,7 @@ import React from 'react'
 import { toast } from 'react-toastify'
 import { db } from '../Config/fireBaseFile'
 import './Awaitcard.css'
-export const AwaitCard = ({name, department, interest, typeofjob, phone , comments, id}) => {
+export const AwaitCard = ({name, department, interest, typeofjob, phone , comments, id, batch}) => {
 
 
     const handleDelete = () =>{
@@ -21,7 +21,11 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
             <i class="fa-solid fa-trash" style={{ cursor: "pointer" }} onClick={() => { handleDelete(); }}></i>
         </div>
         <div className="awaitinner">
-            <span className='acardt1'>{name}</span>
+            <div className='stinfo'>
+                <span className='acardt1'>{name}</span>
+                <span style={{marginLeft:"20px" }}>{department}</span>
+                <span style={{marginLeft:"20px" }}>{batch}</span>
+            </div>
             <span className='acardt2'>{interest}</span>
             <span className='acardt2'>{typeofjob}</span>
         </div>

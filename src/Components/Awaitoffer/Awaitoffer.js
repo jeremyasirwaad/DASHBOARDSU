@@ -9,7 +9,7 @@ export const Awaitoffer = ({ data }) => {
 			<div className="awaitgrid">
                 {
                     data.map((student)=> {
-                        return <AwaitCard name = {student.name} interest = {student.interest} typeofjob = {student.typeofjob} department = { student.department } phone = { student.phone } comments = { student.comments } id = {student.uuid} />
+                        return <AwaitCard name = {student.name} interest = {student.interest} typeofjob = {student.typeofjob} department = { student.department } phone = { student.phone } comments = { student.comments } id = {student.uuid} batch = {student.batch} />
                     })
                 }
 			</div>
