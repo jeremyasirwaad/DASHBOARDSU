@@ -3,7 +3,7 @@ import { Awaitoffer } from "../Awaitoffer/Awaitoffer";
 import { motion } from "framer-motion";
 import "./LandingDash.css";
 
-export const LandingDash = ({ sidenavopenfun, sidenavstatus }) => {
+export const LandingDash = ({ sidenavopenfun, sidenavstatus, data }) => {
 	return (
 		<div
 			onClick={() => {
@@ -23,7 +23,7 @@ export const LandingDash = ({ sidenavopenfun, sidenavstatus }) => {
 									transition: { delay: 0.6, duration: 0.4 },
 								}}></motion.div>
 					<div style={{width:"100%"}}>
-						<Awaitoffer/>
+						<Awaitoffer data = {data}/>
 					</div>
 				</div>
 			</div>

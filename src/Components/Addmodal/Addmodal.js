@@ -20,6 +20,7 @@ export const Addmodal = forwardRef((props, refm) => {
 	const [comments, setComments] = useState(["lsadlasd", "askdasd"]);
 	const [comment, setComment] = useState([]);
 	const [completed, setCompleted] = useState(false);
+	const [phone, setPhone] = useState(0);
 
 
 	useImperativeHandle(refm, () => {
@@ -55,7 +56,8 @@ export const Addmodal = forwardRef((props, refm) => {
 			whatsappgrp,
 			comments,
 			date,
-			completed
+			completed,
+			phone
 		});
 
 		setName("");
