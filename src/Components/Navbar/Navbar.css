@@ -1,0 +1,35 @@
+.navbarcontainer {
+	width: 100vw;
+	height: 70px;
+    display: flex;
+    background-color: rgb(17, 17, 17);
+}
+
+.navbarbody{
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.navbarbody i{
+    display: none;
+ }
+ 
+ 
+
+@media only screen and (max-width:768px) {
+    .navbarbody i{
+        font-size: 22px;
+        color: white;
+        transition: transform 0.3s ease-in;
+        display: flex;
+        cursor: pointer;
+    }
+    
+    .iconrotate{
+        transform: rotateY(180deg);
+    }
+    
+}
+

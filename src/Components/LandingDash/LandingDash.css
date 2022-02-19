@@ -1,0 +1,12 @@
+.landinner{
+    margin-top: 40px;
+    font-family: 'Rubik', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.landinner h1{
+    font-size: 20px;
+}

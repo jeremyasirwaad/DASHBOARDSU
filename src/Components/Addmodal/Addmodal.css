@@ -1,0 +1,135 @@
+.modalbackdrop{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.6);
+
+}
+
+.modalcontainer{
+    position: fixed;
+    width: clamp(40%,600px,90%);
+    height: min(95% , 800px);
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 5;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: 'Rubik', sans-serif;
+    
+}
+
+.modaldiv1
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.landi{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    margin: 10px;
+}
+
+.landi input{
+    min-width: 100%;
+}
+
+.landi select{
+    min-width: 100%;
+}
+
+.landi textarea{
+    min-width: 100%;
+}
+
+.closeicon{
+    position: absolute;
+    right: 30px;
+    font-size: 24px;
+    color: blueviolet;
+    cursor: pointer;
+}
+
+.modelhead{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* font-weight: bold; */
+    /* font-size: 30px; */
+}
+.modalline{
+    height: 5px;
+    width: 80px;
+    background-color: blueviolet;
+
+}
+
+.modalcomment{
+    height: 60px;
+    
+}
+
+.modalsubbtn{
+    position: absolute;
+    background-color: blueviolet;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    height: 40px;
+    width: 70px;
+    padding: 0;
+    right: 30px;
+    bottom: 30px;
+
+}
+
+.div2modal{
+    flex-wrap: nowrap;
+}
+
+.land2{
+    width: 30%;
+}
+
+.land2 input{
+    width: 50%;
+}
+
+@media only screen and (min-width: 765px) {
+    .landi span{
+        font-weight: 500;
+    }
+
+    .landi input, .landi select{
+        height: 45px;
+        border-radius: 5px;
+        border: 1.5px solid black;
+    }
+
+    .landi textarea{
+        border-radius: 5px;
+        border: 1.5px solid black;
+    }
+
+    .modaldiv1{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
