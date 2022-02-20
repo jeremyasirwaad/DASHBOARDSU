@@ -6,7 +6,6 @@ import { db } from "../Config/fireBaseFile";
 import { uid } from "uid";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import fire from "../../Config/fireBaseFile";
 
 export const Addmodal = forwardRef((props, refm) => {
 	const [open, setOpen] = useState(false);
@@ -17,11 +16,10 @@ export const Addmodal = forwardRef((props, refm) => {
 	const [interest, setInterest] = useState("FullStack");
 	const [typeofjob, setTypeofjob] = useState("Internship");
 	const [whatsappgrp, setWhatsappgrp] = useState("Nasscom");
-	const [comments, setComments] = useState(["lsadlasd", "askdasd"]);
-	const [comment, setComment] = useState([]);
+	const [comments, setComments] = useState([]);
+	const [comment, setComment] = useState("");
 	const [completed, setCompleted] = useState(false);
-	const [phone, setPhone] = useState(0);
-
+	
 
 	useImperativeHandle(refm, () => {
 		return {
@@ -40,12 +38,15 @@ export const Addmodal = forwardRef((props, refm) => {
 			toast.error("Fill All the details");
 			return 0;
 		}
-		comments.push(comment);
-		const phone = 0;
+		if(comment !== "")
+		{
+			comments.push(comment);	
+		}
 		const current = new Date();
 		const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 		const uuid = uid();
-		set(ref(db, `/${uuid}`), {
+		// const completedref = ref(db, 'completed/' + uu)
+		set(ref(db,'/completed/' + `/${uuid}`), {
 			uuid,
 			name,
 			batch,
@@ -53,11 +54,9 @@ export const Addmodal = forwardRef((props, refm) => {
 			contactno,
 			interest,
 			typeofjob,
-			whatsappgrp,
 			comments,
 			date,
 			completed,
-			phone
 		});
 
 		setName("");
@@ -179,19 +178,6 @@ export const Addmodal = forwardRef((props, refm) => {
 									<option value="Internship">Internship</option>
 									<option value="PartTime">PartTime</option>
 									<option value="Fulltime">Fulltime</option>
-								</select>
-							</div>
-							<div className="landi">
-								<span>WhatsApp Grp:</span>
-								<select
-									value={whatsappgrp}
-									onChange={(e) => {
-										setWhatsappgrp(e.target.value);
-									}}
-								>
-									<option value="Nasscom">Nasscom</option>
-									<option value="Industrial Ai">Industrial Ai</option>
-									<option value="US StartUps">US StartUps</option>
 								</select>
 							</div>
 						</div>

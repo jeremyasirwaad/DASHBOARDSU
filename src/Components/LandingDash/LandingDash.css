@@ -1,3 +1,12 @@
+
+.loading{
+    height: calc(50vh - 70px);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .landingdashpage
 {
     width: 100vw;

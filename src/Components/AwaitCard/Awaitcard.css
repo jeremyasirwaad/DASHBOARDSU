@@ -31,7 +31,9 @@
     justify-content: space-between;
 }
 
-
+i{
+    cursor: pointer;
+}
 
 .acardt1
 {

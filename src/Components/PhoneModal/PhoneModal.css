@@ -1,0 +1,96 @@
+.phonemodalcontainer{
+    position: fixed;
+    width: clamp(40%,600px,90%);
+    height: min(55%,650px);
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 5;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: 'Rubik', sans-serif;
+}
+
+.phonemodalinner{
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.pcardbtn{
+    position: absolute;
+    right: 50px;
+    bottom: 40px;
+    border: none;
+    background-color: blueviolet;
+    color: white;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.calladd{
+    width: 80%;
+}
+
+.plandi{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.plandi input{
+    min-width: 100%;
+}
+
+.plandi select{
+    min-width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    .phonemodalcontainer{
+        height: 500px
+    }
+
+    .calladd{
+        width: 90%;
+    }
+
+    .phonemodalinner{
+        padding: 0px;
+        margin-top: 14px;
+        height: 70%;
+    }
+
+    .phonemodalcontainer{
+        padding: 30px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .plandi input{
+        height: 35px;
+        border: 1.5px solid black;
+        border-radius: 5px;
+    }
+
+    .plandi select{
+        height: 35px;
+        border: 1.5px solid black;
+        border-radius: 5px;
+    }
+
+
+}

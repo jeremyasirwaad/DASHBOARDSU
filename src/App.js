@@ -7,25 +7,26 @@ import { LandingDash } from "./Components/LandingDash/LandingDash";
 import { ToastContainer, toast } from "react-toastify";
 import { onValue, ref } from "firebase/database";
 import { db } from "./Components/Config/fireBaseFile";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 	const [students, setStudents] = useState([]);
-
 	const [sidenavopen, setSidenavopen] = useState(false);
+	const [studentsawaiting, setStudentsawaiting] = useState([]);
+	const [loaded, setLoaded] = useState(false);
 
 	useEffect(() => {
-		onValue(ref(db), (snapshot) => {
-      setStudents([]);
+		onValue(ref(db, "/completed"), (snapshot) => {
+			setStudentsawaiting([]);
 			const data = snapshot.val();
 			if (data !== null) {
 				Object.values(data).map((student) => {
-					setStudents((oldArray) => [...oldArray, student]);
+					setStudentsawaiting((oldArray) => [...oldArray, student]);
 				});
 			}
 		});
 	}, []);
-
 	const sidenavmanager = () => {
 		setSidenavopen(!sidenavopen);
 	};
@@ -34,20 +35,22 @@ function App() {
 		toast.success("Data Created Sucessfully");
 	};
 
-  if(students === undefined)
-  {
-    console.log(undefined);
-  }
 	return (
 		<div className="App">
 			<ToastContainer />
 			<Navbar sidenavopenfun={sidenavmanager} sidenavstatus={sidenavopen} />
 			<SideNav sidenavstatus={sidenavopen} toastmanager={toastsucess} />
-			<LandingDash
-        data = {students}
-				sidenavopenfun={sidenavmanager}
-				sidenavstatus={sidenavopen}
-			/>
+			{studentsawaiting.length !== 0 ? (
+				<LandingDash
+					data={studentsawaiting}
+					sidenavopenfun={sidenavmanager}
+					sidenavstatus={sidenavopen}
+				/>
+			) : (
+				<div className="loading">
+					<ScaleLoader color={"blueviolet"} loading={true} size={70} />
+				</div>
+			)}
 		</div>
 	);
 }
