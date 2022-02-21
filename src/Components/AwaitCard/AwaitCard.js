@@ -14,15 +14,26 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
         const phoneref = ref(db, '/completed' + `/${id}` + '/phone');
         onValue(phoneref, (snapshot) => {
             setSumma([]);
-            setNoofphone(Object.keys(snapshot.val()).length)
+            // setNoofphone(Object.keys(snapshot.val()).length)
+            Object.values(snapshot.val()).map((shapchild) => {
+                setSumma((oldobj) => [...oldobj, shapchild]);
+            })
+
           });
     },[])
+
+    const getcallcount = () => {
+        const phoneref = ref(db, '/completed' + `/${id}` + '/phone');
+        onValue(phoneref, (snapshot) => {
+            return (Object.keys(snapshot.val()).length)
+          });
+    }
 
     console.log(summa);
     const phonemodalref = useRef();
 
     const handleDelete = () =>{
-        remove(ref(db, `/${id}`));
+        remove(ref(db, '/completed' + `/${id}`));
         toast.error("Deleted Data", {
             theme: "colored"
 
@@ -48,11 +59,9 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
         <div className="acardicons2">
             <div style={{display: "flex", alignItems: "center"}}>
             <i class="fa-solid fa-phone acardphone" onClick={() => {phonemodalref.current.open()}}></i>
-            <span style={{ fontSize: "17px", marginLeft: "5px" }}>{noofphone}</span>
+            <span style={{ fontSize: "17px", marginLeft: "5px" }}>{summa.length}</span>
             </div>
             <div  style={{display: "flex", alignItems: "center"}}>
-            <i class="fa-solid fa-comment"></i>
-            <span style={{ fontSize: "17px", marginLeft: "5px" }}>{noofComments}</span>
             </div>
         </div>
         <PhoneModal ref ={ phonemodalref } id = { id } data = {data} phone = {phone} />

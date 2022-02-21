@@ -16,8 +16,7 @@ export const Addmodal = forwardRef((props, refm) => {
 	const [interest, setInterest] = useState("FullStack");
 	const [typeofjob, setTypeofjob] = useState("Internship");
 	const [whatsappgrp, setWhatsappgrp] = useState("Nasscom");
-	const [comments, setComments] = useState([]);
-	const [comment, setComment] = useState("");
+	const [comments, setComments] = useState("");
 	const [completed, setCompleted] = useState(false);
 	
 
@@ -38,10 +37,7 @@ export const Addmodal = forwardRef((props, refm) => {
 			toast.error("Fill All the details");
 			return 0;
 		}
-		if(comment !== "")
-		{
-			comments.push(comment);	
-		}
+		
 		const current = new Date();
 		const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 		const uuid = uid();
@@ -185,9 +181,9 @@ export const Addmodal = forwardRef((props, refm) => {
 							<div className="landi">
 								<span>Comments</span>
 								<textarea
-									value={comment}
+									value={comments}
 									onChange={(e) => {
-										setComment(e.target.value);
+										setComments(e.target.value);
 									}}
 									className="modalcomment"
 									type="text"
