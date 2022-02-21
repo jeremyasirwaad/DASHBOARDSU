@@ -10,24 +10,14 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
     const [phonelist1, setPhonelist1] = useState([]);
     const [summa, setSumma] = useState([]);
 
-    useEffect(() => {
-        const phoneref = ref(db, '/completed' + `/${id}` + '/phone');
-        onValue(phoneref, (snapshot) => {
-            setSumma([]);
-            // setNoofphone(Object.keys(snapshot.val()).length)
-            Object.values(snapshot.val()).map((shapchild) => {
-                setSumma((oldobj) => [...oldobj, shapchild]);
-            })
+  
 
-          });
-    },[])
-
-    const getcallcount = () => {
-        const phoneref = ref(db, '/completed' + `/${id}` + '/phone');
-        onValue(phoneref, (snapshot) => {
-            return (Object.keys(snapshot.val()).length)
-          });
-    }
+    // const getcallcount = () => {
+    //     const phoneref = ref(db, '/completed' + `/${id}` + '/phone');
+    //     onValue(phoneref, (snapshot) => {
+    //         return (Object.keys(snapshot.val()).length)
+    //       });
+    // }
 
     console.log(summa);
     const phonemodalref = useRef();
@@ -57,11 +47,9 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
         </div>
         <button className='acardbtn'>Got Offer</button>
         <div className="acardicons2">
-            <div style={{display: "flex", alignItems: "center"}}>
-            <i class="fa-solid fa-phone acardphone" onClick={() => {phonemodalref.current.open()}}></i>
-            <span style={{ fontSize: "17px", marginLeft: "5px" }}>{summa.length}</span>
-            </div>
-            <div  style={{display: "flex", alignItems: "center"}}>
+            <div onClick={() => {phonemodalref.current.open()}} style={{cursor: "pointer",display: "flex", alignItems: "center", width: "400px"}}>
+            <i class="fa-solid fa-phone acardphone"></i>
+            <span style={{ fontSize: "17px", width: "100px" }}>Add Call</span>
             </div>
         </div>
         <PhoneModal ref ={ phonemodalref } id = { id } data = {data} phone = {phone} />

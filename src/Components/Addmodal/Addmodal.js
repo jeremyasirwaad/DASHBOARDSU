@@ -4,8 +4,16 @@ import { motion, AnimatePresence, animations } from "framer-motion";
 import { set, ref } from "firebase/database";
 import { db } from "../Config/fireBaseFile";
 import { uid } from "uid";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import { storage } from "../Config/fireBaseFile";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from 'react-router-dom';
+import {
+	getDownloadURL,
+	uploadBytes,
+	uploadBytesResumable,
+} from "firebase/storage";
+import { ref as sref } from "firebase/storage";
 
 export const Addmodal = forwardRef((props, refm) => {
 	const [open, setOpen] = useState(false);
@@ -18,8 +26,9 @@ export const Addmodal = forwardRef((props, refm) => {
 	const [whatsappgrp, setWhatsappgrp] = useState("Nasscom");
 	const [comments, setComments] = useState("");
 	const [completed, setCompleted] = useState(false);
-	
-
+	const [resume, setResume] = useState("");
+	const [progress, setProgress] = useState(0);
+	const [url, setUrl] = useState("");
 	useImperativeHandle(refm, () => {
 		return {
 			open: () => setOpen(true),
@@ -27,22 +36,64 @@ export const Addmodal = forwardRef((props, refm) => {
 		};
 	});
 
+	// const navigate = useNavigate();
+
+	const getResume = (e) => {
+		// setResume(e.target.files[0])
+		if (e.target.files[0]) {
+			setResume(e.target.files[0]);
+			// console.log(e.target.files[0])
+		}
+	};
+
+	const uploadResume = () => {
+		if (!resume) {
+			toast.error("Choose A File", {
+				theme: "colored",
+			});
+			return;
+		}
+		const storageRef = sref(storage, `/resumes/${resume.name}`);
+		const uploadTask = uploadBytesResumable(storageRef, resume);
+
+		uploadTask.on(
+			"state_changed",
+			(snapshot) => {
+				const prog = Math.round(
+					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+				);
+				setProgress(prog);
+			},
+			(err) => console.log(err),
+			() => {
+				getDownloadURL(uploadTask.snapshot.ref)
+				.then(url => setUrl(url));
+				// setUrl(url)
+			}
+		);
+	};
+
 	const onChangehandler = (e) => {
 		setName(e.target.value);
 	};
 
+	// console.log(url)
+
 	const createData = () => {
-		if(name === "" || department === "" || contactno === "+91" )
-		{
+		// uploadResume();
+
+		if (name === "" || department === "" || contactno === "+91") {
 			toast.error("Fill All the details");
 			return 0;
 		}
-		
+
 		const current = new Date();
-		const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+		const date = `${current.getDate()}/${
+			current.getMonth() + 1
+		}/${current.getFullYear()}`;
 		const uuid = uid();
 		// const completedref = ref(db, 'completed/' + uu)
-		set(ref(db,'/completed/' + `/${uuid}`), {
+		set(ref(db, "/completed/" + `/${uuid}`), {
 			uuid,
 			name,
 			batch,
@@ -53,11 +104,13 @@ export const Addmodal = forwardRef((props, refm) => {
 			comments,
 			date,
 			completed,
+			resume: url,
 		});
 
 		setName("");
 		setOpen(false);
 		props.toastmanager();
+		// navigate.go(0);	
 	};
 
 	return (
@@ -190,8 +243,22 @@ export const Addmodal = forwardRef((props, refm) => {
 								/>
 							</div>
 						</div>
+						<div className="fileupload">
+							<input
+								type="file"
+								onChange={getResume}
+								accept="application/pdf"
+							/>
+							<i
+								class="fa-solid fa-cloud-arrow-up"
+								style={{ fontSize: "18px", color: "blueviolet" }}
+								onClick = {() => {uploadResume();}}
+							></i>
+							<span>{progress} %</span>
+						</div>
 						<button
 							onClick={() => {
+								// uploadResume();
 								createData();
 							}}
 							className="modalsubbtn"

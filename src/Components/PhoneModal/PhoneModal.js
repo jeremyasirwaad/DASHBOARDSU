@@ -93,6 +93,7 @@ export const PhoneModal = forwardRef((props, refm) => {
         toast.success("Call Details Added Sucessfully");
         // console.log(props.phone);
         setOpen(false);
+		
 	};
 
 	return (

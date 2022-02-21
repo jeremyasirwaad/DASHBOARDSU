@@ -12,7 +12,7 @@
 .modalcontainer{
     position: fixed;
     width: clamp(40%,600px,90%);
-    height: 630px;
+    height: 640px;
     margin: auto;
     top: 0;
     left: 0;
@@ -68,6 +68,16 @@
     cursor: pointer;
 }
 
+.fileupload{
+    margin: 10px;
+}
+
+.fileupload input{
+    /* color: blueviolet; */
+    font-weight: 400;
+    width: 260px;
+}
+
 .modelhead{
     display: flex;
     flex-direction: column;
@@ -83,7 +93,7 @@
 }
 
 .modalcomment{
-    height: 60px;
+    height: 30px;
     
 }
 
@@ -99,6 +109,14 @@
     right: 30px;
     bottom: 30px;
 
+}
+
+.uploadbtn{
+    background-color: blueviolet;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    height: 40px;
 }
 
 .div2modal{
