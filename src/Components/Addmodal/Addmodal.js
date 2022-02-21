@@ -254,7 +254,7 @@ export const Addmodal = forwardRef((props, refm) => {
 								style={{ fontSize: "18px", color: "blueviolet" }}
 								onClick = {() => {uploadResume();}}
 							></i>
-							<span>{progress} %</span>
+							<span>{progress}%</span>
 						</div>
 						<button
 							onClick={() => {

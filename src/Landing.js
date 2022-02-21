@@ -11,14 +11,12 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { Edit_Showmodal } from "./Components/Edit_showmodal/Edit_Showmodal";
 import {
 	BrowserRouter,
-	Routes,
 	Route,
 	Link
   } from "react-router-dom";
-  import Landing from "./Landing";
 import "react-toastify/dist/ReactToastify.css";
 
-function App() {
+function Landing() {
 	const [students, setStudents] = useState([]);
 	const [sidenavopen, setSidenavopen] = useState(false);
 	const [studentsawaiting, setStudentsawaiting] = useState([]);
@@ -45,7 +43,7 @@ function App() {
 
 	return (
 		<div className="App">
-			{/* <ToastContainer />
+			<ToastContainer />
 			<Navbar sidenavopenfun={sidenavmanager} sidenavstatus={sidenavopen} />
 			<SideNav sidenavstatus={sidenavopen} toastmanager={toastsucess} />
 			{studentsawaiting.length !== 0 ? (
@@ -58,15 +56,10 @@ function App() {
 				<div className="loading">
 					<ScaleLoader color={"blueviolet"} loading={true} size={70} />
 				</div>
-			)} */}
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element = {<Landing />}></Route>
-					<Route path = "/student/:id" element = {<Edit_Showmodal />}></Route>
-				</Routes>
-			</BrowserRouter>
+			)}
+
 		</div>
 	);
 }
 
-export default App;
+export default Landing;

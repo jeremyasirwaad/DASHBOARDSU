@@ -1,3 +1,9 @@
+a:-webkit-any-link {
+    color: Black;
+    cursor: pointer;
+    text-decoration: none;
+}
+
 .modalbackdrop{
     position: fixed;
     top: 0px;
@@ -75,7 +81,7 @@
 .fileupload input{
     /* color: blueviolet; */
     font-weight: 400;
-    width: 260px;
+    width: 200px;
 }
 
 .modelhead{
@@ -154,6 +160,12 @@
     .modaldiv1{
         margin-top: 5px;
         margin-bottom: 5px;
+    }
+
+    .fileupload input{
+        /* color: blueviolet; */
+        font-weight: 400;
+        width: 260px;
     }
 }
 

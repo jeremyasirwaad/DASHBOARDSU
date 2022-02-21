@@ -41,6 +41,18 @@ i{
     font-weight: 500;
 }
 
+.aviewmorebtn
+{
+    border: 2px solid blueviolet;
+    /* background-color: blueviolet; */
+    background-color: white;
+    position: absolute;
+    bottom: 30px;
+    right: 120px;
+    border-radius: 5px;
+    color: black;
+}
+
 .acardbtn{
     border: none;
     background-color: blueviolet;
@@ -49,7 +61,7 @@ i{
     height: 30px;
     width: 80px;
     position: absolute;
-    right: 30px;
+    right: 20px;
     bottom: 30px;
 
 }

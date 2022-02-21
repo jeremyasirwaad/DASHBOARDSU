@@ -1,5 +1,6 @@
 import { onValue, ref, remove, set } from 'firebase/database'
 import React,  { useRef, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { db } from '../Config/fireBaseFile'
 import { PhoneModal } from '../PhoneModal/PhoneModal'
@@ -46,10 +47,11 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
             <span className='acardt2'>{typeofjob}</span>
         </div>
         <button className='acardbtn'>Got Offer</button>
+        <Link to = {`/student/${id}`}><button className='aviewmorebtn'>More</button></Link>
         <div className="acardicons2">
-            <div onClick={() => {phonemodalref.current.open()}} style={{cursor: "pointer",display: "flex", alignItems: "center", width: "400px"}}>
+            <div onClick={() => {phonemodalref.current.open()}} style={{cursor: "pointer",display: "flex", alignItems: "center", width: "200px"}}>
             <i class="fa-solid fa-phone acardphone"></i>
-            <span style={{ fontSize: "17px", width: "100px" }}>Add Call</span>
+            <span style={{ fontSize: "14px", width: "74px" }}>Add Call</span>
             </div>
         </div>
         <PhoneModal ref ={ phonemodalref } id = { id } data = {data} phone = {phone} />
