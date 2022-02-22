@@ -122,6 +122,7 @@ export const Edit_Showmodal = () => {
 			</div>
 			<SideNav sidenavstatus={sidenavopen} toastmanager={toastsucess} />
 			<ToastContainer />
+			<div style={{height:"70px", width: "100vw"}}></div>
 			<div className="detailspage">
 				<div className="detailscontainer">
 					<div className="detailsheading">

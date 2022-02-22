@@ -133,6 +133,8 @@
     width: 100vw;
     height: 70px;
     background-color: black;
+    position: fixed;
+    z-index: 10;
     
 }
 
