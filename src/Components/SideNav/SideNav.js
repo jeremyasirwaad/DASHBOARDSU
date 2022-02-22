@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { motion } from 'framer-motion';
 import { Addmodal } from "../Addmodal/Addmodal";
+import { Link } from "react-router-dom";
  import "./SideNav.css";
 export const SideNav = ({sidenavstatus, toastmanager}) => {
 
@@ -43,10 +44,10 @@ export const SideNav = ({sidenavstatus, toastmanager}) => {
 						<span className={click ? "" : "none"}>Add</span>
 					</div>
 					<div className="navdiv mbt ">
-						<i
+						<Link to="/"><i
 							onClick={clicktrigger}
 							class="fa-solid fa-house sidenavcontainericons"
-						></i>
+						></i></Link>
 						<span className={click ? "" : "none"}>Home</span>
 					</div>
 					<i class="fa-solid fa-minus sidenavcontainericons"></i>

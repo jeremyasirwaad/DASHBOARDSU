@@ -1,0 +1,37 @@
+.callcard{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.ccarddiv{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ccarddiv span{
+    font-weight: 500;
+}
+
+.ccarddiv input{
+    height: 40px;
+    width: 100%;
+}
+
+.callcardhead{
+    color: blueviolet;
+    text-decoration: underline;
+}
+.callcardheaddiv{
+    display: flex;
+    align-items: center;
+}
+
+.callcardheaddiv i{
+    font-size: 20px;
+    margin-left: 40px;
+}

@@ -62,7 +62,7 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element = {<Landing />}></Route>
-					<Route path = "/student/:id" element = {<Edit_Showmodal />}></Route>
+							<Route exact path  = "/student/:type/:id" element = {<Edit_Showmodal />}></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>

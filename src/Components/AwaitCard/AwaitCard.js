@@ -19,8 +19,6 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
     //         return (Object.keys(snapshot.val()).length)
     //       });
     // }
-
-    console.log(summa);
     const phonemodalref = useRef();
 
     const handleDelete = () =>{
@@ -34,7 +32,7 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
   return (
     <div className='awaitcard'>
         <div className="acardicons">
-            <i style={{color:"blueviolet"}}  class="fa-solid fa-pen"></i>
+            <Link to = {`/student/true/${id}`}><i style={{color:"blueviolet"}}  class="fa-solid fa-pen"></i></Link>
             <i class="fa-solid fa-trash" style={{ cursor: "pointer" }} onClick={() => { handleDelete(); }}></i>
         </div>
         <div className="awaitinner">
@@ -47,7 +45,7 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
             <span className='acardt2'>{typeofjob}</span>
         </div>
         <button className='acardbtn'>Got Offer</button>
-        <Link to = {`/student/${id}`}><button className='aviewmorebtn'>More</button></Link>
+        <Link to = {`/student/false/${id}`}><button className='aviewmorebtn'>More</button></Link>
         <div className="acardicons2">
             <div onClick={() => {phonemodalref.current.open()}} style={{cursor: "pointer",display: "flex", alignItems: "center", width: "200px"}}>
             <i class="fa-solid fa-phone acardphone"></i>

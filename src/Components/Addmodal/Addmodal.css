@@ -4,6 +4,11 @@ a:-webkit-any-link {
     text-decoration: none;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 .modalbackdrop{
     position: fixed;
     top: 0px;

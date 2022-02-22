@@ -29,6 +29,7 @@ export const Addmodal = forwardRef((props, refm) => {
 	const [resume, setResume] = useState("");
 	const [progress, setProgress] = useState(0);
 	const [url, setUrl] = useState("");
+	const [phone, setPhone] = useState(0);
 	useImperativeHandle(refm, () => {
 		return {
 			open: () => setOpen(true),
@@ -105,6 +106,7 @@ export const Addmodal = forwardRef((props, refm) => {
 			date,
 			completed,
 			resume: url,
+			// phone,
 		});
 
 		setName("");
