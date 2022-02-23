@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import { Navbar } from "./Components/Navbar/Navbar";
 import { SideNav } from "./Components/SideNav/SideNav";
-
+import { Search } from "./Components/Search/Search";
 import { LandingDash } from "./Components/LandingDash/LandingDash";
 import { ToastContainer, toast } from "react-toastify";
 import { onValue, ref } from "firebase/database";
@@ -63,6 +63,7 @@ function App() {
 				<Routes>
 					<Route path="/" element = {<Landing />}></Route>
 							<Route exact path  = "/student/:type/:id" element = {<Edit_Showmodal />}></Route>
+					<Route path="/search" element = { <Search /> }></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>

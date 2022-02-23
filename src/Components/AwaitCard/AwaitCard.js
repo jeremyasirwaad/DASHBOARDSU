@@ -32,6 +32,21 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
         });
     }
 
+    const handleDelete1 = () => {
+        remove(ref(db, '/completed' + `/${id}`));
+        toast.success("Data Pushed To History", {
+            theme: "colored"
+
+        });
+        
+    }
+
+    const toastsucess2 =() =>{
+		toast.success("Data Moved to History",{
+            theme:'colored'
+        })
+	}
+
   return (
     <div className='awaitcard'>
         <div className="acardicons">
@@ -49,7 +64,7 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
             <span className='acardt2'>{typeofjob}</span>
         </div>
         {
-            data.placementCompany === undefined || data.placementCompany === null || data.placementCompany === "" ? (<button className='acardbtn' onClick={() => {gotofferref.current.open()}}>Got Offer</button>) : (<button className='acardbtn' onClick={() => { handleDelete(); }}><i class="fa-solid fa-check"></i></button>)
+            data.placementCompany === undefined || data.placementCompany === null || data.placementCompany === "" ? (<button className='acardbtn' onClick={() => {gotofferref.current.open()}}>Got Offer</button>) : (<button className='acardbtn' onClick={() => { handleDelete1(); }}><i class="fa-solid fa-check"></i></button>)
         }
         <Link to = {`/student/false/${id}`}><button className='aviewmorebtn'>More</button></Link>
         <div className="acardicons2">
@@ -59,7 +74,7 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
             </div>
         </div>
         <PhoneModal ref ={ phonemodalref } id = { id } data = {data} phone = {phone} />
-        <GotOffer ref = {gotofferref} id = {id} data= {data}/>
+        <GotOffer ref = {gotofferref} id = {id} data= {data} phone = {phone} toastsucc = {toastsucess2}/>
     </div>
   )
 }

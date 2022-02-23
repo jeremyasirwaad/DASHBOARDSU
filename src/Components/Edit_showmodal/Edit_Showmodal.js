@@ -125,7 +125,7 @@ export const Edit_Showmodal = () => {
 				<div className="editnavcontainer">
 					<i
 						class={
-							sidenavopen ? " fa-solid fa-arrow-left " : "fa-solid fa-bars"
+							sidenavopen ? " fa-solid fa-arrow-left nope" : "fa-solid fa-bars nope"
 						}
 						onClick={() => {
 							sidenavmanager();

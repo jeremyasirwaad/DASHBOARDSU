@@ -110,6 +110,13 @@ export const Addmodal = forwardRef((props, refm) => {
 		});
 
 		setName("");
+		setBatch(2023);
+		setComments("");
+		setContactno("+91");
+		setDepartment("");
+		setInterest("Fullstack");
+		setTypeofjob("Internship");
+		setWhatsappgrp("Nasscom");
 		setOpen(false);
 		props.toastmanager();
 		// navigate.go(0);	

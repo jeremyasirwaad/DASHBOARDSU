@@ -1,7 +1,7 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from "react";
 import "../Addmodal/Addmodal.css";
 import { motion, AnimatePresence, animations } from "framer-motion";
-import { set, ref, update, child, onValue, push, get } from "firebase/database";
+import { set, ref, update, child, onValue, push, get, remove } from "firebase/database";
 import { db } from "../Config/fireBaseFile";
 import { uid } from "uid";
 import { ToastContainer, toast } from "react-toastify";
@@ -61,13 +61,19 @@ export const PhoneModal = forwardRef((props, refm) => {
 
         const phoneref = ref(db, '/completed' + `/${props.id}` + '/phone');
         const calldetref = push(phoneref);
+		const current = new Date();
+		const date = `${current.getDate()}/${
+			current.getMonth() + 1
+		}/${current.getFullYear()}`;
         set(calldetref,{
             name: callDetails.CompanyName,
             website: callDetails.CompanyWebsite,
             contactperson: callDetails.ContactPerson,
             contdesg: callDetails.ContactPersonDesignation,
-            whatsappgrp: callDetails.WhatsAppGrp
+            whatsappgrp: callDetails.WhatsAppGrp,
+			date:date
         })
+
 
         // onValue(phoneref, (snapshot) => {
             // snapshot.forEach((childSnapshot) => {
@@ -80,6 +86,7 @@ export const PhoneModal = forwardRef((props, refm) => {
         //   }, {
         //     onlyOnce: true
         //   });
+		
 
 		setCallDetails({
 			CompanyName: "",

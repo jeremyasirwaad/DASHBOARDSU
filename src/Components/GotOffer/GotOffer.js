@@ -15,7 +15,9 @@ export const GotOffer = forwardRef((props, refm) => {
 	const [pcompanysite, setPcompanysite] = useState("");
 	const [Stipend, setStipend] = useState("");
 	const [Whatsapp, setWhatsapp] = useState("");
+	// const [snap, setSnap] = useState({});
 	const [fornowdata, setFornowdata] = useState(props.data);
+	const [phonefornow, setPhonefornow] = useState({});
 
 	useImperativeHandle(refm, () => {
 		return {
@@ -44,14 +46,55 @@ export const GotOffer = forwardRef((props, refm) => {
 			WhatsappGrp:Whatsapp,
 		})
 
-		onChildAdded(ref(db,"/completed"),(snapshot) => {
-			const snap = snapshot.val();
+		// get(ref(db,"/completed" + `/${props.id}`)).then((snapshot)=> {
+		// 		if(snapshot.exists()){
+		// 			console.log(snapshot.val().phone)
+		// 			setFornowdata(snapshot.val());
+
+		// 		}
+		// 		else{
+		// 			toast.error("Error Occured Try Again",{
+		// 				theme:'colored'
+		// 			})
+		// 			return 0;
+		// 		}
+		// })
+
 			set(ref(db,"/finished" + `/${props.id + 1}`),{
-				...snap
+				batch:	fornowdata.batch,
+				name: fornowdata.name,
+				comments: fornowdata.comments,
+				completed:true,
+				contactno: fornowdata.contactno,
+				date: fornowdata.date,
+				departmant:fornowdata.department,
+				interest:fornowdata.interest,
+				resume:fornowdata.resume,
+				typeofjob:fornowdata.typeofjob,
+				uuid: props.id+1,
+				phone:props.phone === undefined ? (null) : (props.phone) ,
+				CompanyWebsite: pcompanysite,
+				Stipend: Stipend,
+				WhatsappGrp:Whatsapp,
+				contactPerson: pcontact,
+				contactPersonDesignation: pcontactdesig,
+				placementCompany: pcompany
 			})
-		})
+
+			
+		
+			remove(ref(db, "/completed" + `/${props.id}`));
+		
+
+
+		setPcompany("");
+		setPcompanysite("");
+		setPcontact("");
+		setStipend("");
+		setWhatsapp("");
 
 		setOpen(false);
+		props.toastsucc();
 	}
 
 	return (
