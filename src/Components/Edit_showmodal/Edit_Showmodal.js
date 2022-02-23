@@ -32,6 +32,13 @@ export const Edit_Showmodal = () => {
 	const [comments, setComments] = useState("");
 	const [sidenavstatus, setSidenavstatus] = useState(false);
 	const [sidenavopen, setSidenavopen] = useState(false);
+	const [placename, setPlacename] = useState('');
+	const [placesite, setPlacesite] = useState('');
+	const [placestipend, setPlacestipend] = useState("");
+	const [placecontactperson, setPlacecontactperson] = useState("");
+	const [placecontactperdesig, setPlacecontactperdesig] = useState("");
+	const [placewhatsapp, setPlacewhatsapp] = useState("");
+	
 
 	useEffect(() => {
 		if (type === "false") {
@@ -51,8 +58,14 @@ export const Edit_Showmodal = () => {
 				setContactno(snapshot.val().contactno);
 				setInterest(snapshot.val().interest);
 				setTypeofjob(snapshot.val().typeofjob);
-				setWhatsappgrp(snapshot.val().whatsappgrp);
+				// setWhatsappgrp(snapshot.val().whatsappgrp);
 				setComments(snapshot.val().comments);
+				setPlacename(snapshot.val().placementCompany);
+				setPlacesite(snapshot.val().CompanyWebsite);
+				setPlacecontactperson(snapshot.val().contactPerson);
+				setPlacecontactperdesig(snapshot.val().contactPersonDesignation);
+				setPlacestipend(snapshot.val().Stipend);
+				setPlacewhatsapp(snapshot.val().WhatsappGrp);
 			});
 		});
 
@@ -122,7 +135,7 @@ export const Edit_Showmodal = () => {
 			</div>
 			<SideNav sidenavstatus={sidenavopen} toastmanager={toastsucess} />
 			<ToastContainer />
-			<div style={{height:"70px", width: "100vw"}}></div>
+			<div style={{ height: "70px", width: "100vw" }}></div>
 			<div className="detailspage">
 				<div className="detailscontainer">
 					<div className="detailsheading">
@@ -273,18 +286,72 @@ export const Edit_Showmodal = () => {
 									}}
 								/>
 							</div>
+							<div className="detaildiv">
+								<span>Posting Date</span>
+								<input value={profile.date} disabled={"true"} type="text" />
+							</div>
 						</div>
 						<div className="calldetailslist">
-						<h3><span style={{ color: "blueviolet" }}>Call</span> Details</h3>
-						<div className="calllist">
-						{profilephone === null ? (
-							<h5 style={{ marginTop:"30px" }}>No Calls So Far !</h5>
-						) : (
-							profilephone.map((e, index) => {
-								return <div><CallCard name = {e.name} index = {index} cperson = {e.contactperson} cpersondesig = {e.contdesg} site = {e.website} whatsapp = {e.whatsappgrp} id = {phonekeys[index]} stid = {id}/></div>;
-							})
-						)}
+							<h3>
+								<span style={{ color: "blueviolet" }}>Call</span> Details
+							</h3>
+							<div className="calllist">
+								{profilephone === null ? (
+									<h5 style={{ marginTop: "30px" }}>No Calls So Far !</h5>
+								) : (
+									profilephone.map((e, index) => {
+										return (
+											<div>
+												<CallCard
+													name={e.name}
+													index={index}
+													cperson={e.contactperson}
+													cpersondesig={e.contdesg}
+													site={e.website}
+													whatsapp={e.whatsappgrp}
+													id={phonekeys[index]}
+													stid={id}
+												/>
+											</div>
+										);
+									})
+								)}
+							</div>
 						</div>
+						<div className="placementdetails">
+								<h3><span style={{color: "blueviolet"}}>Placement</span> Details</h3>
+								{
+									placename === undefined || placename === null || placename === "" ? (
+										<div style={{ width:"100%", display: "flex", justifyContent:"center" }}><h5 style={{ marginTop: "30px" }}>No placement data found!</h5></div>
+									) : (
+										<div className="placecont">
+											<div className="placeinnercont">
+												<span>CompanyName: </span>
+												<input type="text" value={placename} disabled/>
+											</div>
+											<div  className="placeinnercont">
+												<span>Company Website: </span>
+												<input type="text" value={ placesite } disabled/>
+											</div>
+											<div  className="placeinnercont">
+												<span>Contact Person: </span>
+												<input type="text" disabled value={ placecontactperson }/>
+											</div>
+											<div  className="placeinnercont">
+												<span>Contact Person Designation: </span>
+												<input type="text" disabled value={ placecontactperdesig }/>
+											</div>
+											<div  className="placeinnercont">
+												<span>Stipend: </span>
+												<input type="text" disabled value={ placestipend }/>
+											</div>
+											<div className="placeinnercont">
+												<span>Whatsapp Grp: </span>
+												<input type="text" disabled value = { placewhatsapp }/>
+											</div>
+										</div>
+									)
+								}
 						</div>
 					</div>
 				</div>

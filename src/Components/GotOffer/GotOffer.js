@@ -1,7 +1,7 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from "react";
 import "../Addmodal/Addmodal.css";
 import { motion, AnimatePresence, animations } from "framer-motion";
-import { set, ref, update, child, onValue, push, get } from "firebase/database";
+import { set, ref, update, child, onValue, push, get, remove, onChildAdded } from "firebase/database";
 import { db } from "../Config/fireBaseFile";
 import { uid } from "uid";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,7 +9,13 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const GotOffer = forwardRef((props, refm) => {
 	const [open, setOpen] = useState(false);
-
+	const [pcompany, setPcompany] = useState("");
+	const [pcontact, setPcontact] = useState("");
+	const [pcontactdesig, setPcontactdesig] = useState("");
+	const [pcompanysite, setPcompanysite] = useState("");
+	const [Stipend, setStipend] = useState("");
+	const [Whatsapp, setWhatsapp] = useState("");
+	const [fornowdata, setFornowdata] = useState(props.data);
 
 	useImperativeHandle(refm, () => {
 		return {
@@ -18,7 +24,35 @@ export const GotOffer = forwardRef((props, refm) => {
 		};
 	});
 
+	const addplacementdetails = () => {
 
+		if(pcompany === "" || pcontact === "" || pcontactdesig === "" || pcompanysite === "" || Stipend === "" || Whatsapp === "")
+		{
+			toast.error("Fill All The Details",{
+				theme:"colored"
+			})
+
+			return 0;
+		}
+
+		update(ref(db,"/completed" + `/${props.id}`),{
+			placementCompany: pcompany,
+			contactPerson:pcontact,
+			contactPersonDesignation:pcontactdesig,
+			CompanyWebsite:pcompanysite,
+			Stipend:Stipend,
+			WhatsappGrp:Whatsapp,
+		})
+
+		onChildAdded(ref(db,"/completed"),(snapshot) => {
+			const snap = snapshot.val();
+			set(ref(db,"/finished" + `/${props.id + 1}`),{
+				...snap
+			})
+		})
+
+		setOpen(false);
+	}
 
 	return (
 		<AnimatePresence>
@@ -61,7 +95,8 @@ export const GotOffer = forwardRef((props, refm) => {
 									type="text"
 									name="CompanyName"
 									id=""
-									
+									value={ pcompany }
+									onChange={(e) => {setPcompany(e.target.value)}}
 								/>
 							</div>
 							<div className="plandi calladd">
@@ -70,7 +105,8 @@ export const GotOffer = forwardRef((props, refm) => {
 									type="text"
 									name="CompanyWebsite"
 									id=""
-									
+									value={pcompanysite}
+									onChange={(e) => {setPcompanysite(e.target.value)}}
 								/>
 							</div>
 							<div className="plandi calladd">
@@ -79,22 +115,31 @@ export const GotOffer = forwardRef((props, refm) => {
 									type="text"
 									name="ContactPerson"
 									id=""
+									value={pcontact}
+									onChange={(e) => {setPcontact(e.target.value)}}
 								/>
 							</div>
 							<div className="plandi calladd">
-								<span>Contact Person Designation:</span>
+								<span>Contact Person Designation</span>
 								<input
 									type="text"
 									name="ContactPersonDesignation"
 									id="ContactPersonDesignation"
+									value={pcontactdesig}
+									onChange={(e) => {setPcontactdesig(e.target.value)}}
 								/>
 							</div>
                             <div className="plandi calladd">
-                            <span>WhatsAppGrp</span>
-                                <input type="text" name = "WhatsAppGrp" />
+                            <span>Stipend</span>
+                                <input type="text" name = "WhatsAppGrp"  value={Stipend} onChange={(e) => {setStipend(e.target.value)}}/>
+							</div>
+							<div className="plandi calladd">
+                            <span>WhatsappGrp</span>
+                                <input type="text"  value={Whatsapp} onChange={(e) => {setWhatsapp(e.target.value)}}/>
 							</div>
 							<button
 								className="pcardbtn"
+								onClick={()=> { addplacementdetails(); }}
 							>
 								Add Call Data
 							</button>

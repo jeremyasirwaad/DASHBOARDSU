@@ -1,10 +1,9 @@
 import React, { useState, useRef } from "react";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import { Addmodal } from "../Addmodal/Addmodal";
 import { Link } from "react-router-dom";
- import "./SideNav.css";
-export const SideNav = ({sidenavstatus, toastmanager}) => {
-
+import "./SideNav.css";
+export const SideNav = ({ sidenavstatus, toastmanager }) => {
 	const modelref = useRef();
 
 	const [click, setClick] = useState(false);
@@ -39,44 +38,31 @@ export const SideNav = ({sidenavstatus, toastmanager}) => {
 				}
 			>
 				<div className="sidenavinnercontainer">
-					<div onClick={() => { modelref.current.open(); }} className="navdiv navmargin">
-					<i class="fa-solid fa-user-plus sidenavcontainericons"></i>
+					<div
+						onClick={() => {
+							modelref.current.open();
+						}}
+						className="navdiv navmargin"
+					>
+						<i class="fa-solid fa-user-plus sidenavcontainericons"></i>
 						<span className={click ? "" : "none"}>Add</span>
 					</div>
 					<div className="navdiv mbt ">
-						<Link to="/"><i
-							onClick={clicktrigger}
-							class="fa-solid fa-house sidenavcontainericons"
-						></i></Link>
+						<Link to="/">
+							<i
+								onClick={clicktrigger}
+								class="fa-solid fa-house sidenavcontainericons"
+							></i>
+						</Link>
 						<span className={click ? "" : "none"}>Home</span>
 					</div>
 					<i class="fa-solid fa-minus sidenavcontainericons"></i>
 					<div className="navdiv navmargin">
-						<i
-							onClick={onclickfilter}
-							class="fa-solid fa-filter sidenavcontainericons"
-						></i>
-						<span className={click ? "" : "none"}>Filter</span>
-						<i
-							onClick={filtertrigger}
-							className={click ? "fa-solid fa-angle-down" : "none"}
-						></i>
-					</div>
-					<div className={filter ? "filters" : "opacity"}>
-						<motion.div initial = {{ y:500, opacity: 0 }} animate = {{ y:0, opacity: 1 }} className="filtercontainer">
-							<div className="fil">
-								<input type="checkbox" name="FullStack" />
-								<span>FullStacks</span>
-							</div>
-							<div className="fil">
-								<input type="checkbox" name="DataScience" />
-								<span>Data Sci</span>
-							</div>
-							<div className="fil">
-								<input type="checkbox" name="Dataviz" />
-								<span>Data Viz</span>
-							</div>
-						</motion.div>
+						<Link to = "/search">
+							{" "}
+							<i class="fa-solid fa-magnifying-glass sidenavcontainericons"></i>
+						</Link>
+						<span className={click ? "" : "none"}>Search</span>
 					</div>
 					<div className="navdiv">
 						<i class="fa-solid fa-clock-rotate-left sidenavcontainericons"></i>
@@ -85,7 +71,7 @@ export const SideNav = ({sidenavstatus, toastmanager}) => {
 					{/* <i class="fa-solid fa-horizontal-rule"></i> */}
 				</div>
 			</div>
-			<Addmodal ref = {modelref} toastmanager = {toastmanager} />
+			<Addmodal ref={modelref} toastmanager={toastmanager} />
 		</div>
 	);
 };

@@ -37,6 +37,7 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
         <div className="acardicons">
             <Link to = {`/student/true/${id}`}><i style={{color:"blueviolet"}}  class="fa-solid fa-pen"></i></Link>
             <i class="fa-solid fa-trash" style={{ cursor: "pointer" }} onClick={() => { handleDelete(); }}></i>
+            {/* <i onClick={() => {console.log(data)}} class="fa-solid fa-check"></i> */}
         </div>
         <div className="awaitinner">
             <div className='stinfo'>
@@ -47,7 +48,9 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
             <span className='acardt2'>{interest}</span>
             <span className='acardt2'>{typeofjob}</span>
         </div>
-        <button className='acardbtn' onClick={() => {gotofferref.current.open()}}>Got Offer</button>
+        {
+            data.placementCompany === undefined || data.placementCompany === null || data.placementCompany === "" ? (<button className='acardbtn' onClick={() => {gotofferref.current.open()}}>Got Offer</button>) : (<button className='acardbtn' onClick={() => { handleDelete(); }}><i class="fa-solid fa-check"></i></button>)
+        }
         <Link to = {`/student/false/${id}`}><button className='aviewmorebtn'>More</button></Link>
         <div className="acardicons2">
             <div onClick={() => {phonemodalref.current.open()}} style={{cursor: "pointer",display: "flex", alignItems: "center", width: "200px"}}>
@@ -56,7 +59,7 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
             </div>
         </div>
         <PhoneModal ref ={ phonemodalref } id = { id } data = {data} phone = {phone} />
-        <GotOffer ref = {gotofferref}/>
+        <GotOffer ref = {gotofferref} id = {id} data= {data}/>
     </div>
   )
 }
