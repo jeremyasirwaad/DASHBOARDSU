@@ -13,13 +13,6 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
     const [summa, setSumma] = useState([]);
 
   
-
-    // const getcallcount = () => {
-    //     const phoneref = ref(db, '/completed' + `/${id}` + '/phone');
-    //     onValue(phoneref, (snapshot) => {
-    //         return (Object.keys(snapshot.val()).length)
-    //       });
-    // }
     const phonemodalref = useRef();
 
     const gotofferref = useRef();

@@ -37,6 +37,11 @@ export const GotOffer = forwardRef((props, refm) => {
 			return 0;
 		}
 
+		const current = new Date();
+		const date = `${current.getDate()}/${
+			current.getMonth() + 1
+		}/${current.getFullYear()}`;
+
 		update(ref(db,"/completed" + `/${props.id}`),{
 			placementCompany: pcompany,
 			contactPerson:pcontact,
@@ -44,6 +49,7 @@ export const GotOffer = forwardRef((props, refm) => {
 			CompanyWebsite:pcompanysite,
 			Stipend:Stipend,
 			WhatsappGrp:Whatsapp,
+			placementdate: date
 		})
 
 		// get(ref(db,"/completed" + `/${props.id}`)).then((snapshot)=> {
@@ -59,6 +65,7 @@ export const GotOffer = forwardRef((props, refm) => {
 		// 			return 0;
 		// 		}
 		// })
+		
 
 			set(ref(db,"/finished" + `/${props.id + 1}`),{
 				batch:	fornowdata.batch,
@@ -67,7 +74,7 @@ export const GotOffer = forwardRef((props, refm) => {
 				completed:true,
 				contactno: fornowdata.contactno,
 				date: fornowdata.date,
-				departmant:fornowdata.department,
+				department:fornowdata.department,
 				interest:fornowdata.interest,
 				resume:fornowdata.resume,
 				typeofjob:fornowdata.typeofjob,
@@ -78,7 +85,8 @@ export const GotOffer = forwardRef((props, refm) => {
 				WhatsappGrp:Whatsapp,
 				contactPerson: pcontact,
 				contactPersonDesignation: pcontactdesig,
-				placementCompany: pcompany
+				placementCompany: pcompany,
+				placementdate: date
 			})
 
 			

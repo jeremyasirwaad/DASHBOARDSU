@@ -18,7 +18,7 @@ import { ref as sref } from "firebase/storage";
 export const Addmodal = forwardRef((props, refm) => {
 	const [open, setOpen] = useState(false);
 	const [name, setName] = useState("");
-	const [batch, setBatch] = useState(2023);
+	const [batch, setBatch] = useState("2023");
 	const [department, setDepartment] = useState("");
 	const [contactno, setContactno] = useState("+91");
 	const [interest, setInterest] = useState("FullStack");

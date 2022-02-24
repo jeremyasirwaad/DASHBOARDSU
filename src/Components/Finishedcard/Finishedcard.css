@@ -1,0 +1,23 @@
+.placeinfodivcard{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    bottom: 30px;
+    /* left: 30px; */
+}
+
+.viewmorefinishedbtn{
+    border: none;
+    background-color: blueviolet;
+    color: white;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 5px;
+    padding: 3px 5px;
+}
+
+.companyshow{
+    font-weight: 500;
+}

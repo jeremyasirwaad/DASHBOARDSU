@@ -9,6 +9,7 @@ import { onValue, ref } from "firebase/database";
 import { db } from "./Components/Config/fireBaseFile";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { Edit_Showmodal } from "./Components/Edit_showmodal/Edit_Showmodal";
+import { FinishedDetails } from "./Components/finisheddetails/FinishedDetails";
 import {
 	BrowserRouter,
 	Routes,
@@ -63,6 +64,7 @@ function App() {
 				<Routes>
 					<Route path="/" element = {<Landing />}></Route>
 							<Route exact path  = "/student/:type/:id" element = {<Edit_Showmodal />}></Route>
+							<Route exact path = "/finished/:type/:id" element = {<FinishedDetails />}></Route>
 					<Route path="/search" element = { <Search /> }></Route>
 				</Routes>
 			</BrowserRouter>

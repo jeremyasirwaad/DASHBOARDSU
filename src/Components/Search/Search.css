@@ -1,6 +1,54 @@
+.searchandfilterpage{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.searchandfilcont{
+    width: 80%;
+    /* max-width: 1200px; */
+    /* background-color: black; */
+}
+
+.searcheading{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.searchbar{
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.searchbar input{
+    width: 60%;
+    height: 40px;
+    border-radius: 0%;
+}
+
+.searchbar button{
+    border: none;
+    /* background-color: blueviolet; */
+    background-color: black;
+    color: white;
+    height: 40px;
+}
+
 @media only screen and (min-width:768px){
     .nope{
         display: none;
     }
 }
 
+@media only screen and (max-width:768px){
+    .searchbar input{
+        width: 100%;
+        height: 40px;
+    }
+    
+}

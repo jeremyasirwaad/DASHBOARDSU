@@ -1,0 +1,201 @@
+.editpagenav{
+    height: 70px;
+    width: 100vw;
+    background-color: black;
+}
+
+.detailspage{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    
+}
+
+.detailscontainer{
+    /* min-width: 1200px; */
+    width: 70%;
+    max-width: 1200px;
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    
+}
+
+.detailsheading{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.detailspdf{
+    width: 100%;
+    display: flex;
+    margin-top: 40px;
+    flex-direction: column;
+    align-items: center;
+    /* height: 2000px; */
+}
+
+.detailsofprofile{
+    display: flex;
+    flex-direction: column;
+    /* align-items:Center; */
+    width: 100%;
+    height: 750px;
+    justify-content: space-evenly;
+    /* align-items: center; */
+}
+
+.pdfview{
+    display: flex;
+    /* justify-content: flex-start; */
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+}
+
+.detaildiv{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.detaildiv span{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.detaildiv input,.detaildiv select,.detaildiv textarea {
+    width: 100%;
+    height: 40px;
+}
+
+.noresumeconfig{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+.noresumeconfig button{
+    border: none;
+    background-color: blueviolet;
+    color: white;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.noresumeconfig span{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    padding: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    color: white;
+    background-color: blueviolet;
+    display: inline-block;
+}
+
+
+.headingdetails{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.callSection{
+    width: 50%;
+}
+
+.headingdetails I{
+    font-size: 24px;
+}
+
+.navbarforedit{
+    width: 100vw;
+    height: 70px;
+    background-color: black;
+    position: fixed;
+    z-index: 5;
+    
+}
+
+.editnavcontainer{
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    padding: 20px;
+    /* margin-right: 20px; */
+    font-size: 20px;
+    align-items: center;
+    height: 100%;
+}
+
+.calldetailslist{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.calllist{
+    width: 100%;
+}
+
+.placementdetails{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom:100px;
+}
+
+.placecont{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.placeinnercont{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.placeinnercont input{
+    width: 100%;
+    height: 40px;
+}
+
+.placeinnercont span{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 762px){
+    .detailscontainer{
+        width: 90%  ;
+    }
+}
