@@ -13,7 +13,7 @@ export const FinishedCard = ({name, department, interest, typeofjob, phone , com
   return (
     <div className='awaitcard'>
     <div className="acardicons">
-        <i style={{color:"blueviolet"}}  class="fa-solid fa-pen"></i>
+        <Link to = {`/finished/true/${id}`}><i style={{color:"blueviolet"}}  class="fa-solid fa-pen"></i></Link>
         <i class="fa-solid fa-trash" style={{ cursor: "pointer" }} onClick={() => {handledelete()}}></i>
         {/* <i onClick={() => {console.log(data)}} class="fa-solid fa-check"></i> */}
     </div>
