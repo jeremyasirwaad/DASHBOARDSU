@@ -16,7 +16,7 @@ export const GotOffer = forwardRef((props, refm) => {
 	const [Stipend, setStipend] = useState("");
 	const [Whatsapp, setWhatsapp] = useState("");
 	// const [snap, setSnap] = useState({});
-	const [fornowdata, setFornowdata] = useState(props.data);
+	// const [fornowdata, setFornowdata] = useState(props.data);
 	const [phonefornow, setPhonefornow] = useState({});
 
 	useImperativeHandle(refm, () => {
@@ -68,16 +68,16 @@ export const GotOffer = forwardRef((props, refm) => {
 		
 
 			set(ref(db,"/finished" + `/${props.id + 1}`),{
-				batch:	fornowdata.batch,
-				name: fornowdata.name,
-				comments: fornowdata.comments,
+				batch:	props.data.batch,
+				name: props.data.name,
+				comments: props.data.comments,
 				completed:true,
-				contactno: fornowdata.contactno,
-				date: fornowdata.date,
-				department:fornowdata.department,
-				interest:fornowdata.interest,
-				resume:fornowdata.resume,
-				typeofjob:fornowdata.typeofjob,
+				contactno: props.data.contactno,
+				date: props.data.date,
+				department:props.data.department,
+				interest:props.data.interest,
+				resume:props.data.resume,
+				typeofjob:props.data.typeofjob,
 				uuid: props.id+1,
 				phone:props.phone === undefined ? (null) : (props.phone) ,
 				CompanyWebsite: pcompanysite,
