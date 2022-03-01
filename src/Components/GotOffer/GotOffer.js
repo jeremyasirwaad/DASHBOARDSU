@@ -7,6 +7,7 @@ import { uid } from "uid";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 export const GotOffer = forwardRef((props, refm) => {
 	const [open, setOpen] = useState(false);
 	const [pcompany, setPcompany] = useState("");
@@ -90,7 +91,28 @@ export const GotOffer = forwardRef((props, refm) => {
 			})
 
 			
-		
+			set(ref(db,"/gotoffer" + `/${props.id + 1}`),{
+				batch:	props.data.batch,
+				name: props.data.name,
+				comments: props.data.comments,
+				completed:true,
+				contactno: props.data.contactno,
+				date: props.data.date,
+				department:props.data.department,
+				interest:props.data.interest,
+				resume:props.data.resume,
+				typeofjob:props.data.typeofjob,
+				uuid: props.id+1,
+				phone:props.phone === undefined ? (null) : (props.phone) ,
+				CompanyWebsite: pcompanysite,
+				Stipend: Stipend,
+				WhatsappGrp:Whatsapp,
+				contactPerson: pcontact,
+				contactPersonDesignation: pcontactdesig,
+				placementCompany: pcompany,
+				placementdate: date
+			})
+
 			remove(ref(db, "/completed" + `/${props.id}`));
 		
 

@@ -65,7 +65,7 @@ export const SideNav = ({ sidenavstatus, toastmanager }) => {
 						<span className={click ? "" : "none"}>Search</span>
 					</div>
 					<div className="navdiv">
-						<i class="fa-solid fa-clock-rotate-left sidenavcontainericons"></i>
+						<Link to = "/tables"><i class="fa-solid fa-table sidenavcontainericons"></i></Link>
 						<span className={click ? "" : "none"}>History</span>
 					</div>
 					{/* <i class="fa-solid fa-horizontal-rule"></i> */}

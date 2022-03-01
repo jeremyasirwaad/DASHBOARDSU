@@ -17,6 +17,7 @@ import {
 	Link
   } from "react-router-dom";
   import Landing from "./Landing";
+  import { TableFilter } from "./Components/Tablefilter/TableFilter";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
 							<Route exact path  = "/student/:type/:id" element = {<Edit_Showmodal />}></Route>
 							<Route exact path = "/finished/:type/:id" element = {<FinishedDetails />}></Route>
 					<Route path="/search" element = { <Search /> }></Route>
+					<Route path="/tables" element = { <TableFilter/> }></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>
