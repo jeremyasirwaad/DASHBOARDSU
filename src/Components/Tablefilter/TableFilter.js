@@ -2,26 +2,24 @@ import React, { useState, useEffect } from "react";
 import "./Tablefilter.css";
 import { ToastContainer, toast } from "react-toastify";
 import { SideNav } from "../SideNav/SideNav";
-import ReactTable from "react-table-6";
-import "react-table-6/react-table.css";
 import { onValue, ref } from "firebase/database";
 import { db } from "../Config/fireBaseFile";
+import MaterialTable from "material-table";
 
 export const TableFilter = () => {
 	const [sidenavopen, setSidenavopen] = useState(false);
 	const [tabledata, setTabledata] = useState([]);
 
-  useEffect(() => {
+	useEffect(() => {
+		onValue(ref(db, "/finished"), (snapshot) => {
+			setTabledata([]);
+			Object.values(snapshot.val()).map((child) => {
+				setTabledata((oldval) => [...oldval, child]);
+			});
+		});
+	}, []);
 
-    onValue(ref(db, "/finished"), (snapshot) => {
-      setTabledata([]);
-      Object.values(snapshot.val()).map((child) => {
-        setTabledata((oldval) => [...oldval, child]);
-      });
-    });
-  }, []);
-
-  // console.log(Object.values(tabledata[0].phone))
+	// console.log(Object.values(tabledata[0].phone))
 
 	const sidenavmanager = () => {
 		setSidenavopen(!sidenavopen);
@@ -30,55 +28,6 @@ export const TableFilter = () => {
 	const toastsucess = () => {
 		toast.success("Data Created Sucessfully", {});
 	};
-
-	const data = [
-		{
-			name: "Tanner Linsley",
-			age: 26,
-			friend: {
-				name: "Jason Maurer",
-				age: 23,
-			},
-		},
-	];
-
-	const columns = [
-		{
-			Header: "Name",
-			accessor: "name",
-		},
-		{
-			Header: "Department",
-			accessor: "department",
-		},
-		{
-			Header: "Batch",
-			accessor: "batch",
-		},
-		{
-			Header: "Type Of Job",
-			accessor: "typeofjob",
-		},
-		{
-			Header: "Placement Company",
-			accessor: "placementCompany",
-      
-		},
-    {
-      id: "calls",
-      Header:"Calls",
-      accessor: d => {
-        const phone = Object.values(d.phone);
-        const spans = phone.map((e) => {
-          return e.name + "\t" // console.log(e.name)
-        })
-        // return phone.name;
-        return spans
-        // console.log(spans);
-      }
-
-    }
-	];
 
 	return (
 		<div>
@@ -100,7 +49,40 @@ export const TableFilter = () => {
 			<ToastContainer />
 			<div style={{ height: "70px", width: "100vw" }}></div>
 			<div className="tablepage">
-				<ReactTable filterable = {true}  data={tabledata} columns={columns} />
+				<div className="innertabcont">
+					<MaterialTable
+						columns={[
+							{ title: "Name", field: "name",  },
+							{ title: "Department", field: "department" },
+							{ title: "Batch", field: "batch" },
+							{ title: "Type of Job", field: "typeofjob"},
+							{ title: "Skill", field: "interest", lookup: {FullStack: "FullStack", DataScience: "DataScience", DataEngineering: "DataEngineering" , DataVisualization: "DataVisualization"}},
+							{
+								title: "Calls",
+								field: "phone",
+								render: (phone) => {
+									const phonedata = Object.values(phone.phone);
+									const list = phonedata.map((e) => {
+										return e.name + ", "
+									})
+
+									return list
+								},
+								export: false
+							},
+							{ title: "CompanyPlaced", field: "placementCompany" },
+							{ title: "Stipend", field: "Stipend" },
+
+						]}
+
+						options={{
+							exportButton: true,
+							filtering: true
+						  }}
+						data={tabledata}
+						title="Placement Data"
+					/>
+				</div>
 			</div>
 		</div>
 	);
