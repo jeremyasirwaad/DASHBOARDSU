@@ -19,6 +19,8 @@ export const GotOffer = forwardRef((props, refm) => {
 	// const [snap, setSnap] = useState({});
 	// const [fornowdata, setFornowdata] = useState(props.data);
 	const [phonefornow, setPhonefornow] = useState({});
+	const [prevyear, setPrevyear] = useState([]);
+	const [comnameprev, setComnameprev] = useState([]);
 
 	useImperativeHandle(refm, () => {
 		return {
@@ -26,6 +28,26 @@ export const GotOffer = forwardRef((props, refm) => {
 			close: () => setOpen(false),
 		};
 	});
+
+	useEffect(() => {
+		
+		onValue(ref(db,"/yeardata"),(snapshot)=> {
+			if(snapshot.val() !== null && snapshot.val() !== undefined)
+			{
+				setPrevyear(snapshot.val().year);
+				// console.log(snapshot.val().year)
+			}
+		})
+
+		onValue(ref(db,"/compnamedata"),(snapshot)=> {
+			if(snapshot.val() !== null && snapshot.val() !== undefined)
+			{
+				setComnameprev(snapshot.val().companylist);
+				// console.log(snapshot.val().year)
+			}
+		})
+			
+	},[])
 
 	const addplacementdetails = () => {
 
@@ -37,6 +59,27 @@ export const GotOffer = forwardRef((props, refm) => {
 
 			return 0;
 		}
+
+		prevyear.push((props.data.batch));
+
+		let uniqueChars = prevyear.filter((c, index) => {
+			return prevyear.indexOf(c) === index;
+		});
+
+		update(ref(db, "/yeardata"),{
+			year:uniqueChars
+		})
+
+		comnameprev.push(pcompany);
+
+		let uniqueCharslist = comnameprev.filter((c, index) => {
+			return comnameprev.indexOf(c) === index;
+		});
+
+		update(ref(db, "/compnamedata"),{
+			companylist: uniqueCharslist
+		})
+
 
 		const current = new Date();
 		const date = `${current.getDate()}/${
@@ -203,7 +246,7 @@ export const GotOffer = forwardRef((props, refm) => {
 								/>
 							</div>
                             <div className="plandi calladd">
-                            <span>Stipend</span>
+                            <span>Compensation</span>
                                 <input type="text" name = "WhatsAppGrp"  value={Stipend} onChange={(e) => {setStipend(e.target.value)}}/>
 							</div>
 							<div className="plandi calladd">
@@ -214,7 +257,7 @@ export const GotOffer = forwardRef((props, refm) => {
 								className="pcardbtn"
 								onClick={()=> { addplacementdetails(); }}
 							>
-								Add Call Data
+								Add Placement Data
 							</button>
 						</div>
 					</motion.div>

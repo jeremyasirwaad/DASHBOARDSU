@@ -194,6 +194,17 @@
     font-size: 18px;
 }
 
+.placementheading{
+    display: flex;
+    align-items: center;
+    width: 350px;
+    justify-content: space-between;
+}
+
+.placementheading i{
+    font-size: 20px
+}
+
 @media only screen and (max-width: 762px){
     .detailscontainer{
         width: 90%  ;

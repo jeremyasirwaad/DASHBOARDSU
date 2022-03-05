@@ -17,19 +17,17 @@ export const PhoneModal = forwardRef((props, refm) => {
 		ContactPersonDesignation: "",
         WhatsAppGrp: ""
 	});
+	const [callprev, setCallprev] = useState([]);
 
-    // useEffect(() => {
-    //     setPhonelist([]);
-    //     onValue(ref(db,'/completed' + `/${props.id}`), (snapshot) => {
-    //         const data = snapshot.val();
-    //         if(data.phone !== undefined)
-    //         {
-    //             Object.values(data).map((student) => {
-    //                 setPhonelist((oldarray) => [...oldarray,student]);
-    //             })
-    //         }
-    //     })
-    // },[])
+	useEffect(() => {
+		onValue(ref(db,"/calldata"),(snapshot)=> {
+			if(snapshot.val() !== null && snapshot.val() !== undefined)
+			{
+				setCallprev(snapshot.val().calllist);
+				
+			}
+		})
+	}, []);
 
 	useImperativeHandle(refm, () => {
 		return {
@@ -58,6 +56,16 @@ export const PhoneModal = forwardRef((props, refm) => {
 			});
 			return 0;
 		}
+
+		callprev.push((callDetails.CompanyName));
+
+		let uniqueChars = callprev.filter((c, index) => {
+			return callprev.indexOf(c) === index;
+		});
+
+		update(ref(db, "/calldata"),{
+			calllist:uniqueChars
+		})
 
         const phoneref = ref(db, '/completed' + `/${props.id}` + '/phone');
         const calldetref = push(phoneref);

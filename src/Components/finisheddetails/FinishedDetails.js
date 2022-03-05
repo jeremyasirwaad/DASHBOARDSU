@@ -11,6 +11,13 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Worker } from "@react-pdf-viewer/core";
 import { CallCard } from "../CallCard/CallCard";
+import { storage } from "../Config/fireBaseFile";
+import {
+	getDownloadURL,
+	uploadBytes,
+	uploadBytesResumable,
+} from "firebase/storage";
+import { ref as sref } from "firebase/storage";
 
 import "./Edit_show.css";
 import { toast, ToastContainer } from "react-toastify";
@@ -32,13 +39,16 @@ export const FinishedDetails = () => {
 	const [comments, setComments] = useState("");
 	const [sidenavstatus, setSidenavstatus] = useState(false);
 	const [sidenavopen, setSidenavopen] = useState(false);
-	const [placename, setPlacename] = useState('');
-	const [placesite, setPlacesite] = useState('');
+	const [placename, setPlacename] = useState("");
+	const [placesite, setPlacesite] = useState("");
 	const [placestipend, setPlacestipend] = useState("");
 	const [placecontactperson, setPlacecontactperson] = useState("");
 	const [placecontactperdesig, setPlacecontactperdesig] = useState("");
 	const [placewhatsapp, setPlacewhatsapp] = useState("");
-	
+	const [editplcament, setEditplcament] = useState(true);
+	const [resume, setResume] = useState("");
+	const [progress, setProgress] = useState(0);
+	const [url, setUrl] = useState("");
 
 	useEffect(() => {
 		if (type === "false") {
@@ -119,13 +129,73 @@ export const FinishedDetails = () => {
 		setEdit(true);
 	};
 
+	const updateplacementhandler = () => {
+		update(ref(db, "/finished" + `/${id}`), {
+			placementCompany: placename,
+			contactPerson: placecontactperson,
+			contactPersonDesignation: placecontactperdesig,
+			Stipend: placestipend,
+			WhatsappGrp: placewhatsapp,
+		});
+
+		toast.success("Updated Placement Details", {
+			theme: "colored",
+		});
+		setEditplcament(true);
+	};
+
+	const getResume = (e) => {
+		// setResume(e.target.files[0])
+		if (e.target.files[0]) {
+			setResume(e.target.files[0]);
+			// console.log(e.target.files[0])
+		}
+	};
+
+	const uploadResume = () => {
+		if (!resume) {
+			toast.error("Choose A File", {
+				theme: "colored",
+			});
+			return;
+		}
+		const storageRef = sref(storage, `/resumes/${resume.name}`);
+		const uploadTask = uploadBytesResumable(storageRef, resume);
+
+		uploadTask.on(
+			"state_changed",
+			(snapshot) => {
+				const prog = Math.round(
+					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+				);
+				setProgress(prog);
+			},
+			(err) => console.log(err),
+			() => {
+				getDownloadURL(uploadTask.snapshot.ref).then((url) => setUrl(url));
+				// setUrl(url)
+			}
+		);
+
+		
+	};
+
+
+	const subresume = () => {
+		update(ref(db, "/finished" + `/${id}`),{
+			resume: url
+		})
+	}
+
 	return (
 		<div>
 			<div className="navbarforedit">
 				<div className="editnavcontainer">
 					<i
 						class={
-							sidenavopen ? " fa-solid fa-arrow-left nope" : "fa-solid fa-bars nope"
+							sidenavopen
+								? " fa-solid fa-arrow-left nope"
+								: "fa-solid fa-bars nope"
 						}
 						onClick={() => {
 							sidenavmanager();
@@ -154,11 +224,25 @@ export const FinishedDetails = () => {
 						profile.resume === null ||
 						profile.resume === "" ? (
 							<div className="pdfview">
-								<div className="noresumeconfig">
-									<span>No Resume Found!</span>
-									<input type="file" name="file" id="file" class="inputfile" />
-									<label for="file">Choose a file</label>
-								</div>
+								{resume === "" ? (
+									<div className="noresumeconfig">
+										<span>No Resume Found!</span>
+										<input
+											type="file"
+											name="file"
+											id="file"
+											class="inputfile"
+											onChange={(e) => {
+												getResume(e);
+											}}
+										/>
+										<label for="file">Choose a file</label>
+									</div>
+								) : (
+									
+									progress === 100 ? <lable onClick = {() => { subresume(); }}>Done</lable> : <label for="file" onClick={() => { uploadResume(); }}>Upload Choosen Resume{progress}%</label>
+			
+								)}
 							</div>
 						) : (
 							<div className="pdfview">
@@ -319,39 +403,112 @@ export const FinishedDetails = () => {
 							</div>
 						</div>
 						<div className="placementdetails">
-								<h3><span style={{color: "blueviolet"}}>Placement</span> Details</h3>
-								{
-									placename === undefined || placename === null || placename === "" ? (
-										<div style={{ width:"100%", display: "flex", justifyContent:"center" }}><h5 style={{ marginTop: "30px" }}>No placement data found!</h5></div>
-									) : (
-										<div className="placecont">
-											<div className="placeinnercont">
-												<span>CompanyName: </span>
-												<input type="text" value={placename} disabled/>
-											</div>
-											<div  className="placeinnercont">
-												<span>Company Website: </span>
-												<input type="text" value={ placesite } disabled/>
-											</div>
-											<div  className="placeinnercont">
-												<span>Contact Person: </span>
-												<input type="text" disabled value={ placecontactperson }/>
-											</div>
-											<div  className="placeinnercont">
-												<span>Contact Person Designation: </span>
-												<input type="text" disabled value={ placecontactperdesig }/>
-											</div>
-											<div  className="placeinnercont">
-												<span>Stipend: </span>
-												<input type="text" disabled value={ placestipend }/>
-											</div>
-											<div className="placeinnercont">
-												<span>Whatsapp Grp: </span>
-												<input type="text" disabled value = { placewhatsapp }/>
-											</div>
-										</div>
-									)
-								}
+							<div className="placementheading">
+								{" "}
+								<h3>
+									<span style={{ color: "blueviolet" }}>Placement</span> Details
+								</h3>
+								{editplcament ? (
+									<i
+										class="fa-solid fa-pen-to-square"
+										onClick={() => {
+											setEditplcament(false);
+										}}
+									></i>
+								) : (
+									<i
+										class="fa-solid fa-floppy-disk"
+										onClick={() => {
+											updateplacementhandler();
+										}}
+									></i>
+								)}
+							</div>
+
+							{placename === undefined ||
+							placename === null ||
+							placename === "" ? (
+								<div
+									style={{
+										width: "100%",
+										display: "flex",
+										justifyContent: "center",
+									}}
+								>
+									<h5 style={{ marginTop: "30px" }}>
+										No placement data found!
+									</h5>
+								</div>
+							) : (
+								<div className="placecont">
+									<div className="placeinnercont">
+										<span>CompanyName: </span>
+										<input
+											type="text"
+											value={placename}
+											disabled={editplcament}
+											onChange={(e) => {
+												setPlacename(e.target.value);
+											}}
+										/>
+									</div>
+									<div className="placeinnercont">
+										<span>Company Website: </span>
+										<input
+											type="text"
+											value={placesite}
+											disabled={editplcament}
+											onChange={(e) => {
+												setPlacesite(e.target.value);
+											}}
+										/>
+									</div>
+									<div className="placeinnercont">
+										<span>Contact Person: </span>
+										<input
+											type="text"
+											disabled={editplcament}
+											value={placecontactperson}
+											onChange={(e) => {
+												setPlacecontactperson(e.target.value);
+											}}
+										/>
+									</div>
+									<div className="placeinnercont">
+										<span>Contact Person Designation: </span>
+										<input
+											type="text"
+											disabled={editplcament}
+											value={placecontactperdesig}
+											onChange={(e) => {
+												setPlacecontactperdesig(e.target.value);
+											}}
+										/>
+									</div>
+									<div className="placeinnercont">
+										<span>Stipend: </span>
+										<input
+											type="text"
+											disabled={editplcament}
+											value={placestipend}
+											onChange={(e) => {
+												setPlacestipend(e.target.value);
+											}}
+										/>
+									</div>
+									<div className="placeinnercont">
+										<span>Whatsapp Grp: </span>
+										<input
+											type="text"
+											disabled={editplcament}
+											value={placewhatsapp}
+											onChange={(e) => {
+												setPlacewhatsapp(e.target.value);
+											}}
+										/>
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>

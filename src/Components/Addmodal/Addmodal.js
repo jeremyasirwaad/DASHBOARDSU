@@ -1,7 +1,7 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, { useState, forwardRef, useImperativeHandle, useEffect } from "react";
 import "./Addmodal.css";
 import { motion, AnimatePresence, animations } from "framer-motion";
-import { set, ref } from "firebase/database";
+import { set, ref, onValue, update } from "firebase/database";
 import { db } from "../Config/fireBaseFile";
 import { uid } from "uid";
 import { ToastContainer, toast } from "react-toastify";
@@ -21,7 +21,7 @@ export const Addmodal = forwardRef((props, refm) => {
 	const [batch, setBatch] = useState("2023");
 	const [department, setDepartment] = useState("");
 	const [contactno, setContactno] = useState("+91");
-	const [interest, setInterest] = useState("FullStack");
+	const [interest, setInterest] = useState("Fullstack");
 	const [typeofjob, setTypeofjob] = useState("Internship");
 	const [whatsappgrp, setWhatsappgrp] = useState("Nasscom");
 	const [comments, setComments] = useState("");
@@ -30,6 +30,7 @@ export const Addmodal = forwardRef((props, refm) => {
 	const [progress, setProgress] = useState(0);
 	const [url, setUrl] = useState("");
 	const [phone, setPhone] = useState(0);
+	const [prevyear, setPrevyear] = useState([]);
 	useImperativeHandle(refm, () => {
 		return {
 			open: () => setOpen(true),
@@ -37,7 +38,7 @@ export const Addmodal = forwardRef((props, refm) => {
 		};
 	});
 
-	// const navigate = useNavigate();
+
 
 	const getResume = (e) => {
 		// setResume(e.target.files[0])
@@ -88,11 +89,17 @@ export const Addmodal = forwardRef((props, refm) => {
 			return 0;
 		}
 
+	
+
+	
 		const current = new Date();
 		const date = `${current.getDate()}/${
 			current.getMonth() + 1
 		}/${current.getFullYear()}`;
 		const uuid = uid();
+
+
+
 		// const completedref = ref(db, 'completed/' + uu)
 		set(ref(db, "/completed/" + `/${uuid}`), {
 			uuid,
@@ -217,10 +224,10 @@ export const Addmodal = forwardRef((props, refm) => {
 										setInterest(e.target.value);
 									}}
 								>
-									<option value="FullStack">FullStack</option>
-									<option value="DataScience">Data Science</option>
-									<option value="DataEngineering">Data Engineering</option>
-									<option value="DataVisualization">Data Visualization</option>
+									<option value="Fullstack">FullStack</option>
+									<option value="Datascience">Data Science</option>
+									<option value="Dataengineering">Data Engineering</option>
+									<option value="Datavisualization">Data Visualization</option>
 								</select>
 							</div>
 						</div>
