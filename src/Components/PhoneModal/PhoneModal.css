@@ -1,7 +1,8 @@
 .phonemodalcontainer{
     position: fixed;
     width: clamp(40%,600px,90%);
-    height: min(55%,650px);
+    /* height: min(55%,650px); */
+    height: 600px;
     margin: auto;
     top: 0;
     left: 0;
