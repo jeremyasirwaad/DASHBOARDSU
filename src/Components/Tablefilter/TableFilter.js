@@ -56,7 +56,7 @@ export const TableFilter = () => {
 			if (snapshot.val() !== null && snapshot.val() !== undefined) {
 				// setFake1(snapshot.val().year);
 				var obj = snapshot.val().calllist.reduce(function (acc, cur, i) {
-					acc[cur] = cur;
+					acc[cur.slice(11)] = cur.slice(11);
 					return acc;
 				}, {});
 				setDynamicobjcall(obj);
@@ -119,6 +119,7 @@ export const TableFilter = () => {
 					<MaterialTable
 						onRowClick={(event, rowData) => {
 							navigate(`/finished/false/${rowData.uuid}`)
+			
 						}}
 						columns={[
 							{ title: "Name", field: "name" },
@@ -168,24 +169,31 @@ export const TableFilter = () => {
 								lookup: dynamicobjcall,
 								customFilterAndSearch: (term, rowData) => {
 									// console.log(phone)
-									const callarray = Object.values(rowData.phone);
+									let callarray;
+									if(rowData.phone !== null && rowData.phone !== undefined)
+									{
+										callarray = Object.values(rowData.phone);
+									}	
 									// console.log(callarray);
 									let name1 = "";
 									let name2;
-									callarray.map((e)=>{
+									if(callarray !== undefined && callarray !== null)
+									{
+									callarray.map((e) => {
 										// console.log(e.name.concat(e.name));
 										name1 = name1 + e.name;
-									})
-
+									});
+									}
 									// console.log(term.join(""));
 									// console.log(name1.toString());
-									if(name1.toLowerCase().includes(term.join("").toLowerCase()))
-									{
+									if (
+										name1.toLowerCase().includes(term.join("").toLowerCase())
+									) {
 										return true;
-									}
-									else{
+									} else {
 										return false;
 									}
+								
 								},
 								render: (phone) => {
 									if (phone.phone === null || phone.phone === undefined) {
@@ -210,6 +218,7 @@ export const TableFilter = () => {
 							{ title: "Stipend", field: "Stipend" },
 						]}
 						options={{
+							search: false,
 							exportButton: true,
 							filtering: true,
 							headerStyle: {

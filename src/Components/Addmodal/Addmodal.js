@@ -1,4 +1,9 @@
-import React, { useState, forwardRef, useImperativeHandle, useEffect } from "react";
+import React, {
+	useState,
+	forwardRef,
+	useImperativeHandle,
+	useEffect,
+} from "react";
 import "./Addmodal.css";
 import { motion, AnimatePresence, animations } from "framer-motion";
 import { set, ref, onValue, update } from "firebase/database";
@@ -7,7 +12,7 @@ import { uid } from "uid";
 import { ToastContainer, toast } from "react-toastify";
 import { storage } from "../Config/fireBaseFile";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import {
 	getDownloadURL,
 	uploadBytes,
@@ -19,7 +24,7 @@ export const Addmodal = forwardRef((props, refm) => {
 	const [open, setOpen] = useState(false);
 	const [name, setName] = useState("");
 	const [batch, setBatch] = useState("2023");
-	const [department, setDepartment] = useState("");
+	const [department, setDepartment] = useState("IT");
 	const [contactno, setContactno] = useState("+91");
 	const [interest, setInterest] = useState("Fullstack");
 	const [typeofjob, setTypeofjob] = useState("Internship");
@@ -37,8 +42,6 @@ export const Addmodal = forwardRef((props, refm) => {
 			close: () => setOpen(false),
 		};
 	});
-
-
 
 	const getResume = (e) => {
 		// setResume(e.target.files[0])
@@ -68,8 +71,7 @@ export const Addmodal = forwardRef((props, refm) => {
 			},
 			(err) => console.log(err),
 			() => {
-				getDownloadURL(uploadTask.snapshot.ref)
-				.then(url => setUrl(url));
+				getDownloadURL(uploadTask.snapshot.ref).then((url) => setUrl(url));
 				// setUrl(url)
 			}
 		);
@@ -89,16 +91,11 @@ export const Addmodal = forwardRef((props, refm) => {
 			return 0;
 		}
 
-	
-
-	
 		const current = new Date();
 		const date = `${current.getDate()}/${
 			current.getMonth() + 1
 		}/${current.getFullYear()}`;
 		const uuid = uid();
-
-
 
 		// const completedref = ref(db, 'completed/' + uu)
 		set(ref(db, "/completed/" + `/${uuid}`), {
@@ -126,7 +123,7 @@ export const Addmodal = forwardRef((props, refm) => {
 		setWhatsappgrp("Nasscom");
 		setOpen(false);
 		props.toastmanager();
-		// navigate.go(0);	
+		// navigate.go(0);
 	};
 
 	return (
@@ -196,13 +193,22 @@ export const Addmodal = forwardRef((props, refm) => {
 							</div>  */}
 							<div className="landi land2">
 								<span>Department:</span>
-								<input
+								<select
 									type="text"
 									value={department}
 									onChange={(e) => {
 										setDepartment(e.target.value);
 									}}
-								/>
+								>
+									<option value="IT">IT</option>
+									<option value="CSE">CSE</option>
+									<option value="EEE">EEE</option>
+									<option value="ECE">ECE</option>
+									<option value="ECE">Mech</option>
+									<option value="ECE">Civil</option>
+									<option value="ECE">Prod</option>
+									<option value="ECE">IBT</option>
+								</select>
 							</div>
 						</div>
 						<div className="modaldiv1">
@@ -268,7 +274,9 @@ export const Addmodal = forwardRef((props, refm) => {
 							<i
 								class="fa-solid fa-cloud-arrow-up"
 								style={{ fontSize: "18px", color: "blueviolet" }}
-								onClick = {() => {uploadResume();}}
+								onClick={() => {
+									uploadResume();
+								}}
 							></i>
 							<span>{progress}%</span>
 						</div>

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { db } from '../Config/fireBaseFile'
 import { PhoneModal } from '../PhoneModal/PhoneModal'
 import { GotOffer } from '../GotOffer/GotOffer'
+import { update } from 'firebase/database';
 import './Awaitcard.css'
 export const AwaitCard = ({name, department, interest, typeofjob, phone , comments, id, batch, data}) => {
     const [noofComments, setNoofComments] = useState(0);
@@ -18,11 +19,46 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
     const gotofferref = useRef();
 
     const handleDelete = () =>{
+        let snaps;
+        let snapsyear;
+        let snapscall;
+        onValue(ref(db, "/compnamedata/companylist"),(snapshot) => {
+            if(snapshot.val() !== null && snapshot.val() !== undefined)
+            {
+                snaps = snapshot.val();
+            }
+        })
+
+        onValue(ref(db, "/yeardata/year"),(snapshot) => {
+            if(snapshot.val() !== null && snapshot.val() !== undefined)
+            {
+                snapsyear = snapshot.val();
+            }
+        })
+
+        onValue(ref(db, "/calldata/calllist"),(snapshot) => {
+            if(snapshot.val() !== null && snapshot.val() !== undefined)
+            {
+                snapscall = snapshot.val();
+            }
+        })
+
+            let fillcalllist;
+            if(snapscall!== undefined)
+            {
+                fillcalllist = snapscall.filter((e) => !e.includes(id.slice(0,11)))
+            }
+
+            update(ref(db, "/calldata"),{
+                calllist:fillcalllist
+            })
         remove(ref(db, '/completed' + `/${id}`));
         toast.error("Deleted Data", {
             theme: "colored"
 
         });
+
+        
     }
 
     const handleDelete1 = () => {

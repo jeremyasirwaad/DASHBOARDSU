@@ -185,6 +185,9 @@ export const FinishedDetails = () => {
 		update(ref(db, "/finished" + `/${id}`),{
 			resume: url
 		})
+
+		setResume("");
+		setProgress(0);
 	}
 
 	return (
@@ -240,19 +243,12 @@ export const FinishedDetails = () => {
 									</div>
 								) : (
 									
-									progress === 100 ? <lable onClick = {() => { subresume(); }}>Done</lable> : <label for="file" onClick={() => { uploadResume(); }}>Upload Choosen Resume{progress}%</label>
+									progress === 100 ? <lable style = {{backgroundColor:"blueviolet", padding: "5px", color:"white", cursor:"pointer"}} onClick = {() => { subresume(); }}>Done</lable> : <label for="file" style={{ backgroundColor:"blueviolet", padding: "5px", color:"white", cursor:"pointer" }} onClick={() => { uploadResume(); }}>Upload Choosen Resume - {progress}%</label>
 			
 								)}
 							</div>
 						) : (
 							<div className="pdfview">
-								{/* <object
-									data={`${profile.resume}?#zoom=40`}
-									width="100%"
-									height="100%"
-									src={`${profile.resume}?#zoom=40`}
-									type="application/pdf"
-								/> */}
 								<Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.min.js">
 									<Viewer
 										fileUrl={`${profile.resume}?#zoom=40`}
@@ -260,9 +256,56 @@ export const FinishedDetails = () => {
 										// defaultScale = {0.5}
 									/>
 								</Worker>
+								{resume === "" ? (
+									<div className="noresumeconfig" style={{marginTop:'10px'}}>
+										<input
+											type="file"
+											name="file"
+											id="file"
+											class="inputfile"
+											onChange={(e) => {
+												getResume(e);
+											}}
+										/>
+										<label for="file">Update Resume</label>
+									</div>
+								) : progress === 100 ? (
+									<lable
+										style={{
+											backgroundColor: "blueviolet",
+											padding: "5px",
+											color: "white",
+											cursor: "pointer",
+											marginTop:'10px'
+										}}
+										onClick={() => {
+											subresume();
+										}}
+									>
+										Done
+									</lable>
+								) : (
+									<label
+										for="file"
+										style={{
+											backgroundColor: "blueviolet",
+											padding: "5px",
+											color: "white",
+											cursor: "pointer",
+											marginTop:'10px'
+
+										}}
+										onClick={() => {
+											uploadResume();
+										}}
+									>
+										Upload Choosen Resume - {progress}%
+									</label>
+								)}
+							
 							</div>
 						)}
-						<div className="detailsofprofile">
+						<div className="detailsofprofile" style={{ marginTop: "30px" }}>
 							<div className="headingdetails">
 								<h3>
 									Details of the{" "}

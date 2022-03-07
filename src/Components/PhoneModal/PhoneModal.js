@@ -49,6 +49,14 @@ export const PhoneModal = forwardRef((props, refm) => {
 		});
 	};
 
+	const formatestring = (string) => {
+		let string1 = string.replaceAll(' ','');
+		let string2 = string1.toLowerCase();
+		let string3 = string2.charAt(0).toUpperCase() + string2.slice(1);
+		return string3;
+		// console.log(string3);
+	}
+
 	const addCallDetails = () => {
 		if (callDetails.CompanyName === "") {
 			toast.error("Enter Company Name", {
@@ -57,7 +65,7 @@ export const PhoneModal = forwardRef((props, refm) => {
 			return 0;
 		}
 
-		callprev.push((callDetails.CompanyName));
+		callprev.push(`${props.id}` + formatestring(callDetails.CompanyName));
 
 		let uniqueChars = callprev.filter((c, index) => {
 			return callprev.indexOf(c) === index;
@@ -73,8 +81,13 @@ export const PhoneModal = forwardRef((props, refm) => {
 		const date = `${current.getDate()}/${
 			current.getMonth() + 1
 		}/${current.getFullYear()}`;
+		
+		// let compname = callDetails.CompanyName.join(" ")
+
+
+
         set(calldetref,{
-            name: callDetails.CompanyName,
+            name: formatestring(callDetails.CompanyName),
             website: callDetails.CompanyWebsite,
             contactperson: callDetails.ContactPerson,
             contdesg: callDetails.ContactPersonDesignation,

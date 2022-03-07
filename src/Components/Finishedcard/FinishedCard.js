@@ -1,4 +1,4 @@
-import { ref, remove } from 'firebase/database'
+import { onValue, ref, remove, update } from 'firebase/database'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { db } from '../Config/fireBaseFile'
@@ -7,6 +7,60 @@ import './Finishedcard.css'
 export const FinishedCard = ({name, department, interest, typeofjob, phone , comments, id, batch, placementdate, placementCompany, Stipend}) => {
 
     const handledelete =() => {
+        let snaps;
+        let snapsyear;
+        let snapscall;
+        onValue(ref(db, "/compnamedata/companylist"),(snapshot) => {
+            if(snapshot.val() !== null && snapshot.val() !== undefined)
+            {
+                snaps = snapshot.val();
+            }
+        })
+
+        onValue(ref(db, "/yeardata/year"),(snapshot) => {
+            if(snapshot.val() !== null && snapshot.val() !== undefined)
+            {
+                snapsyear = snapshot.val();
+            }
+        })
+
+        onValue(ref(db, "/calldata/calllist"),(snapshot) => {
+            if(snapshot.val() !== null && snapshot.val() !== undefined)
+            {
+                snapscall = snapshot.val();
+            }
+        })
+
+            let fillist;
+            if(snaps !== undefined)
+            {
+                fillist = snaps.filter((e) => e != placementCompany);
+            }
+            let fillyearlist;
+            if(snapsyear !== undefined)
+            {
+                 fillyearlist = snapsyear.filter((e) => e != batch);
+            }
+            let fillcalllist;
+            if(snapscall!== undefined)
+            {
+                fillcalllist = snapscall.filter((e) => !e.includes(id.slice(0,11)))
+            }
+            // console.log(fillcalllist)
+            // console.log(snapscall)
+            // console.log(id.slice(0,11));
+            update(ref(db, "/compnamedata"),{
+                companylist: fillist
+            })
+    
+            update(ref(db, "/yeardata"),{
+                year:fillyearlist
+            })
+
+            update(ref(db, "/calldata"),{
+                calllist:fillcalllist
+            })
+        
         remove(ref(db, '/finished' + `/${id}`))
     }
 

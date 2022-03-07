@@ -49,11 +49,28 @@ export const GotOffer = forwardRef((props, refm) => {
 			
 	},[])
 
+	const formatestring = (string) => {
+		let string1 = string.replaceAll(' ','');
+		let string2 = string1.toLowerCase();
+		let string3 = string2.charAt(0).toUpperCase() + string2.slice(1);
+		return string3;
+		// console.log(string3);
+	}
+
 	const addplacementdetails = () => {
 
 		if(pcompany === "" || pcontact === "" || pcontactdesig === "" || pcompanysite === "" || Stipend === "" || Whatsapp === "")
 		{
 			toast.error("Fill All The Details",{
+				theme:"colored"
+			})
+
+			return 0;
+		}
+
+		if(props.phone === null || props.phone === undefined)
+		{
+			toast.error("No Call data Found !",{
 				theme:"colored"
 			})
 
@@ -70,7 +87,7 @@ export const GotOffer = forwardRef((props, refm) => {
 			year:uniqueChars
 		})
 
-		comnameprev.push(pcompany);
+		comnameprev.push(formatestring(pcompany));
 
 		let uniqueCharslist = comnameprev.filter((c, index) => {
 			return comnameprev.indexOf(c) === index;
@@ -87,7 +104,7 @@ export const GotOffer = forwardRef((props, refm) => {
 		}/${current.getFullYear()}`;
 
 		update(ref(db,"/completed" + `/${props.id}`),{
-			placementCompany: pcompany,
+			placementCompany: formatestring(pcompany),
 			contactPerson:pcontact,
 			contactPersonDesignation:pcontactdesig,
 			CompanyWebsite:pcompanysite,
@@ -129,7 +146,7 @@ export const GotOffer = forwardRef((props, refm) => {
 				WhatsappGrp:Whatsapp,
 				contactPerson: pcontact,
 				contactPersonDesignation: pcontactdesig,
-				placementCompany: pcompany,
+				placementCompany: formatestring(pcompany),
 				placementdate: date
 			})
 

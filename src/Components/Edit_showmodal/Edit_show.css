@@ -50,10 +50,11 @@
 
 .pdfview{
     display: flex;
+    flex-direction: column;
     /* justify-content: flex-start; */
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content:space-evenly;
     height: 500px;
 }
 
