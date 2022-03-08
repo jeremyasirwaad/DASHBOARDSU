@@ -441,6 +441,7 @@ export const Edit_Showmodal = () => {
 													whatsapp={e.whatsappgrp}
 													id={phonekeys[index]}
 													stid={id}
+													status="completed"
 												/>
 											</div>
 										);

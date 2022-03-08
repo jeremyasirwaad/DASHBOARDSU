@@ -2,8 +2,9 @@ import { ref, remove, update } from 'firebase/database';
 import React, {useState} from 'react'
 import { toast, ToastContainer } from 'react-toastify';
 import { db } from '../Config/fireBaseFile';
+import { onValue } from 'firebase/database';
 import './callcard.css'
-export const CallCard = ({name, index, cperson, cpersondesig, site, whatsapp, id, stid}) => {
+export const CallCard = ({name, index, cperson, cpersondesig, site, whatsapp, id, stid,status}) => {
 
     const [newname, setNewname] = useState(name);
     const [newcperson, setNewcperson] = useState(cperson);
@@ -14,9 +15,29 @@ export const CallCard = ({name, index, cperson, cpersondesig, site, whatsapp, id
     const [editcall, setEditcall] = useState(true);
 
     const updatecalllist = () => {
+        let callliss;
+		onValue(ref(db, "/calldata/calllist"), (snapshot) => {
+			if(snapshot.val() !== null & snapshot.val() !==undefined)
+			{
+				callliss = snapshot.val();
+			}
+            console.log(callliss)
+		})
 
-        const phlistref = ref(db,"/completed" + `/${stid}` + "/phone" + `/${id}`)
-        update(phlistref,{
+
+		if(callliss !== null && callliss !== undefined)
+		{
+			callliss = callliss.filter((e) => !e.includes((stid+ 1).slice(0,11) + name));
+			// console.log(compnamelis1)
+			callliss.push(stid.slice(0,11) + newname);
+
+			update(ref(db, "/calldata"),{
+				calllist: callliss
+			})
+		}
+
+        // const phlistref = ref(db,`/finished` + `/${stid}` + "/phone" + `/${id}`)
+        update(ref(db,`/${status}` + `/${stid}` + "/phone" + `/${id}` ),{
             contactperson: newcperson,
             contdesg: newcpersondesig,
             name: newname,
@@ -30,7 +51,7 @@ export const CallCard = ({name, index, cperson, cpersondesig, site, whatsapp, id
     }
 
     const deletecall = () => {
-        const phlistref = ref(db,"/completed" + `/${stid}` + "/phone" + `/${id}`)
+        const phlistref = ref(db,`/${status}` + `/${stid}` + "/phone" + `/${id}`)
         remove(phlistref);
         toast.success(`Call Data Deleted`);
     }

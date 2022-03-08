@@ -47,11 +47,12 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
             if(snapscall!== undefined)
             {
                 fillcalllist = snapscall.filter((e) => !e.includes(id.slice(0,11)))
+                update(ref(db, "/calldata"),{
+                    calllist:fillcalllist
+                })
             }
 
-            update(ref(db, "/calldata"),{
-                calllist:fillcalllist
-            })
+    
         remove(ref(db, '/completed' + `/${id}`));
         toast.error("Deleted Data", {
             theme: "colored"

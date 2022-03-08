@@ -86,7 +86,7 @@ export const Addmodal = forwardRef((props, refm) => {
 	const createData = () => {
 		// uploadResume();
 
-		if (name === "" || department === "" || contactno === "+91") {
+		if (name === ""  || contactno === "+91") {
 			toast.error("Fill All the details");
 			return 0;
 		}
@@ -151,7 +151,7 @@ export const Addmodal = forwardRef((props, refm) => {
 							class="fa-solid fa-rectangle-xmark closeicon"
 						></i>
 						<div className="modelhead">
-							<h3>Create Data</h3>
+							<h3>Create Profile</h3>
 							<motion.div
 								initial={{ scaleX: 0 }}
 								animate={{
@@ -198,16 +198,17 @@ export const Addmodal = forwardRef((props, refm) => {
 									value={department}
 									onChange={(e) => {
 										setDepartment(e.target.value);
+										console.log(department)
 									}}
 								>
 									<option value="IT">IT</option>
 									<option value="CSE">CSE</option>
 									<option value="EEE">EEE</option>
 									<option value="ECE">ECE</option>
-									<option value="ECE">Mech</option>
-									<option value="ECE">Civil</option>
-									<option value="ECE">Prod</option>
-									<option value="ECE">IBT</option>
+									<option value="Mech">Mech</option>
+									<option value="Civil">Civil</option>
+									<option value="Prod">Prod</option>
+									<option value="IBT">IBT</option>
 								</select>
 							</div>
 						</div>
@@ -231,9 +232,9 @@ export const Addmodal = forwardRef((props, refm) => {
 									}}
 								>
 									<option value="Fullstack">FullStack</option>
-									<option value="Datascience">Data Science</option>
+									<option value="DatascienceandAnalytics">Data Science & Analytics</option>
 									<option value="Dataengineering">Data Engineering</option>
-									<option value="Datavisualization">Data Visualization</option>
+									<option value="DigitalMarketing">Data Marketing</option>
 								</select>
 							</div>
 						</div>

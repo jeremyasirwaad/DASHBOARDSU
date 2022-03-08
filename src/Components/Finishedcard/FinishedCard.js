@@ -34,17 +34,17 @@ export const FinishedCard = ({name, department, interest, typeofjob, phone , com
             let fillist;
             if(snaps !== undefined)
             {
-                fillist = snaps.filter((e) => e != placementCompany);
+                fillist = snaps.filter((e) => !e.includes(id.slice(0,11)));
             }
             let fillyearlist;
             if(snapsyear !== undefined)
             {
-                 fillyearlist = snapsyear.filter((e) => e != batch);
+                 fillyearlist = snapsyear.filter((e) => !e.includes(id.slice(0,11)));
             }
             let fillcalllist;
             if(snapscall!== undefined)
             {
-                fillcalllist = snapscall.filter((e) => !e.includes(id.slice(0,11)))
+                fillcalllist = snapscall.filter((e) => !e.includes(id.slice(0,11)));
             }
             // console.log(fillcalllist)
             // console.log(snapscall)

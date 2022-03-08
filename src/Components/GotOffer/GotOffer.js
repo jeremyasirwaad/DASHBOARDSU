@@ -77,7 +77,7 @@ export const GotOffer = forwardRef((props, refm) => {
 			return 0;
 		}
 
-		prevyear.push((props.data.batch));
+		prevyear.push(`${props.id}` + (props.data.batch));
 
 		let uniqueChars = prevyear.filter((c, index) => {
 			return prevyear.indexOf(c) === index;
@@ -87,7 +87,7 @@ export const GotOffer = forwardRef((props, refm) => {
 			year:uniqueChars
 		})
 
-		comnameprev.push(formatestring(pcompany));
+		comnameprev.push( `${props.id}`  +  formatestring(pcompany));
 
 		let uniqueCharslist = comnameprev.filter((c, index) => {
 			return comnameprev.indexOf(c) === index;
@@ -103,15 +103,15 @@ export const GotOffer = forwardRef((props, refm) => {
 			current.getMonth() + 1
 		}/${current.getFullYear()}`;
 
-		update(ref(db,"/completed" + `/${props.id}`),{
-			placementCompany: formatestring(pcompany),
-			contactPerson:pcontact,
-			contactPersonDesignation:pcontactdesig,
-			CompanyWebsite:pcompanysite,
-			Stipend:Stipend,
-			WhatsappGrp:Whatsapp,
-			placementdate: date
-		})
+		// update(ref(db,"/completed" + `/${props.id}`),{
+		// 	placementCompany: formatestring(pcompany),
+		// 	contactPerson:pcontact,
+		// 	contactPersonDesignation:pcontactdesig,
+		// 	CompanyWebsite:pcompanysite,
+		// 	Stipend:Stipend,
+		// 	WhatsappGrp:Whatsapp,
+		// 	placementdate: date
+		// })
 
 		// get(ref(db,"/completed" + `/${props.id}`)).then((snapshot)=> {
 		// 		if(snapshot.exists()){
@@ -151,27 +151,27 @@ export const GotOffer = forwardRef((props, refm) => {
 			})
 
 			
-			set(ref(db,"/gotoffer" + `/${props.id + 1}`),{
-				batch:	props.data.batch,
-				name: props.data.name,
-				comments: props.data.comments,
-				completed:true,
-				contactno: props.data.contactno,
-				date: props.data.date,
-				department:props.data.department,
-				interest:props.data.interest,
-				resume:props.data.resume,
-				typeofjob:props.data.typeofjob,
-				uuid: props.id+1,
-				phone:props.phone === undefined ? (null) : (props.phone) ,
-				CompanyWebsite: pcompanysite,
-				Stipend: Stipend,
-				WhatsappGrp:Whatsapp,
-				contactPerson: pcontact,
-				contactPersonDesignation: pcontactdesig,
-				placementCompany: pcompany,
-				placementdate: date
-			})
+			// set(ref(db,"/gotoffer" + `/${props.id + 1}`),{
+			// 	batch:	props.data.batch,
+			// 	name: props.data.name,
+			// 	comments: props.data.comments,
+			// 	completed:true,
+			// 	contactno: props.data.contactno,
+			// 	date: props.data.date,
+			// 	department:props.data.department,
+			// 	interest:props.data.interest,
+			// 	resume:props.data.resume,
+			// 	typeofjob:props.data.typeofjob,
+			// 	uuid: props.id+1,
+			// 	phone:props.phone === undefined ? (null) : (props.phone) ,
+			// 	CompanyWebsite: pcompanysite,
+			// 	Stipend: Stipend,
+			// 	WhatsappGrp:Whatsapp,
+			// 	contactPerson: pcontact,
+			// 	contactPersonDesignation: pcontactdesig,
+			// 	placementCompany: pcompany,
+			// 	placementdate: date
+			// })
 
 			remove(ref(db, "/completed" + `/${props.id}`));
 		

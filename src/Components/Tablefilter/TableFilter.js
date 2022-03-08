@@ -34,7 +34,7 @@ export const TableFilter = () => {
 			if (snapshot.val() !== null && snapshot.val() !== undefined) {
 				// setFake1(snapshot.val().year);
 				var obj = snapshot.val().year.reduce(function (acc, cur, i) {
-					acc[cur] = cur;
+					acc[cur.slice(11)] = cur.slice(11);
 					return acc;
 				}, {});
 				setdynamicobj(obj);
@@ -45,7 +45,7 @@ export const TableFilter = () => {
 			if (snapshot.val() !== null && snapshot.val() !== undefined) {
 				// setFake1(snapshot.val().year);
 				var obj = snapshot.val().companylist.reduce(function (acc, cur, i) {
-					acc[cur] = cur;
+					acc[cur.slice(11)] = cur.slice(11);
 					return acc;
 				}, {});
 				setDynamicobjcompname(obj);
@@ -156,9 +156,9 @@ export const TableFilter = () => {
 								field: "interest",
 								lookup: {
 									Fullstack: "Fullstack",
-									Datascience: "Datascience",
+									DatascienceandAnalytics : "Datascience and Analytics",
 									Dataengineering: "Dataengineering",
-									Datavisualization: "Datavisualization",
+									DigitalMarketing: "DigitalMarketing"
 								},
 							},
 							{

@@ -112,6 +112,27 @@ export const FinishedDetails = () => {
 	}
 	// console.log(profile.resume);
 	const updateHander = () => {
+
+		let batchlist;
+		onValue(ref(db, "/yeardata/year"), (snapshot) => {
+			if(snapshot.val() !== null & snapshot.val() !==undefined)
+			{
+				batchlist = snapshot.val();
+			}
+		})
+
+
+		if(batchlist !== null && batchlist !== undefined)
+		{
+			batchlist = batchlist.filter((e) => !e.includes((id + 1).slice(0,11)));
+			// console.log(batchlist1)
+			batchlist.push( id.slice(0,11) + batch);
+
+			update(ref(db, "/yeardata"),{
+				year: batchlist 
+			})
+		}
+
 		update(ref(db, "/finished" + `/${id}`), {
 			name,
 			batch,
@@ -130,6 +151,27 @@ export const FinishedDetails = () => {
 	};
 
 	const updateplacementhandler = () => {
+
+		let compnamelis;
+		onValue(ref(db, "/compnamedata/companylist"), (snapshot) => {
+			if(snapshot.val() !== null & snapshot.val() !==undefined)
+			{
+				compnamelis = snapshot.val();
+			}
+		})
+
+
+		if(compnamelis !== null && compnamelis !== undefined)
+		{
+			compnamelis = compnamelis.filter((e) => !e.includes((id + 1).slice(0,11)));
+			// console.log(compnamelis1)
+			compnamelis.push( id.slice(0,11) + placename);
+
+			update(ref(db, "/compnamedata"),{
+				companylist: compnamelis 
+			})
+		}
+
 		update(ref(db, "/finished" + `/${id}`), {
 			placementCompany: placename,
 			contactPerson: placecontactperson,
@@ -438,6 +480,7 @@ export const FinishedDetails = () => {
 													whatsapp={e.whatsappgrp}
 													id={phonekeys[index]}
 													stid={id}
+													status="finished"
 												/>
 											</div>
 										);
