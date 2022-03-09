@@ -59,9 +59,9 @@ export const GotOffer = forwardRef((props, refm) => {
 
 	const addplacementdetails = () => {
 
-		if(pcompany === "" || pcontact === "" || pcontactdesig === "" || pcompanysite === "" || Stipend === "" || Whatsapp === "")
+		if(pcompany === "" ||  Stipend === "" || Whatsapp === "")
 		{
-			toast.error("Fill All The Details",{
+			toast.error("Fill Name , Stipend & Group Name",{
 				theme:"colored"
 			})
 

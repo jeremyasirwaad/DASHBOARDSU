@@ -1,12 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@1,500&display=swap');
 .navbarcontainer {
 	width: 100vw;
 	height: 70px;
     display: flex;
-    background-color: rgb(17, 17, 17);
+    background-color: #111111;
     position: fixed;
 
-    justify-content: flex-end;
+    justify-content: space-between;
     z-index: 1;
+}
+
+.logo{
+    width: auto;
+    height: 70px;
+}
+
+.titledivfornav{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+    align-items: flex-start;
+    height: 70px;
+    margin-left: 20px;
+    /* justify-content: center; */
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
 }
 
 .navbarbody{
@@ -36,6 +55,9 @@
         transform: rotateY(180deg);
  
 
+    }
+    .titledivfornav{
+        margin-left: 0px;
     }
     
 }

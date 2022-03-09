@@ -141,11 +141,11 @@
 
 .editnavcontainer{
     display: flex;
-    justify-content: flex-end;
-    color: white;
+    justify-content: space-between;
+    /* color: white; */
     padding: 20px;
-    /* margin-right: 20px; */
-    font-size: 20px;
+    margin-right: 20px;
+    /* font-size: 20px; */
     align-items: center;
     height: 100%;
 }
@@ -198,5 +198,8 @@
 @media only screen and (max-width: 762px){
     .detailscontainer{
         width: 90%  ;
+    }
+    .editnavcontainer{
+        padding: 0px;
     }
 }

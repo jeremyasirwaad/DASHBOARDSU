@@ -175,6 +175,10 @@ export const Edit_Showmodal = () => {
 		<div>
 			<div className="navbarforedit">
 				<div className="editnavcontainer">
+				<div className="titledivfornav">
+						{/* <img className="logo" src={logo} alt="Logo" /> */}
+						<h2 style={{ marginBottom: "0px" }}>StartTalent</h2>
+					</div>
 					<i
 						class={
 							sidenavopen

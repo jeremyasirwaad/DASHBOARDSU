@@ -87,8 +87,8 @@ export const AwaitCard = ({name, department, interest, typeofjob, phone , commen
         <div className="awaitinner">
             <div className='stinfo'>
                 <span className='acardt1'>{name}</span>
-                <span style={{marginLeft:"20px" }}>{department}</span>
-                <span style={{marginLeft:"20px" }}>{batch}</span>
+                <span style={{marginLeft:"10px" }}>{department}</span>
+                <span style={{marginLeft:"10px" }}>{batch}</span>
             </div>
             <span className='acardt2'>{interest}</span>
             <span className='acardt2'>{typeofjob}</span>

@@ -140,7 +140,7 @@
 
 .editnavcontainer{
     display: flex;
-    justify-content: flex-end;
+    justify-content:    space-between;
     color: white;
     padding: 20px;
     /* margin-right: 20px; */
@@ -209,4 +209,6 @@
     .detailscontainer{
         width: 90%  ;
     }
+
+    
 }

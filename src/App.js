@@ -10,21 +10,17 @@ import { db } from "./Components/Config/fireBaseFile";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { Edit_Showmodal } from "./Components/Edit_showmodal/Edit_Showmodal";
 import { FinishedDetails } from "./Components/finisheddetails/FinishedDetails";
-import {
-	BrowserRouter,
-	Routes,
-	Route,
-	Link
-  } from "react-router-dom";
-  import Landing from "./Landing";
-  import { TableFilter } from "./Components/Tablefilter/TableFilter";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Landing from "./Landing";
+import loadinglogo from "./StartTalent.gif";
+import { TableFilter } from "./Components/Tablefilter/TableFilter";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 	const [students, setStudents] = useState([]);
 	const [sidenavopen, setSidenavopen] = useState(false);
 	const [studentsawaiting, setStudentsawaiting] = useState([]);
-	const [loaded, setLoaded] = useState(false);
+	const [loaded, setLoaded] = useState(true);
 
 	useEffect(() => {
 		onValue(ref(db, "/completed"), (snapshot) => {
@@ -45,6 +41,10 @@ function App() {
 		toast.success("Data Created Sucessfully");
 	};
 
+	setTimeout(() => {
+		setLoaded(false);
+	}, 2000);
+
 	return (
 		<div className="App">
 			{/* <ToastContainer />
@@ -61,15 +61,29 @@ function App() {
 					<ScaleLoader color={"blueviolet"} loading={true} size={70} />
 				</div>
 			)} */}
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element = {<Landing />}></Route>
-							<Route exact path  = "/student/:type/:id" element = {<Edit_Showmodal />}></Route>
-							<Route exact path = "/finished/:type/:id" element = {<FinishedDetails />}></Route>
-					<Route path="/search" element = { <Search /> }></Route>
-					<Route path="/tables" element = { <TableFilter/> }></Route>
-				</Routes>
-			</BrowserRouter>
+			{loaded ? (
+				<div className="startupload" >
+					<img src={loadinglogo} alt="" />
+					</div>
+			) : (
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<Landing />}></Route>
+						<Route
+							exact
+							path="/student/:type/:id"
+							element={<Edit_Showmodal />}
+						></Route>
+						<Route
+							exact
+							path="/finished/:type/:id"
+							element={<FinishedDetails />}
+						></Route>
+						<Route path="/search" element={<Search />}></Route>
+						<Route path="/tables" element={<TableFilter />}></Route>
+					</Routes>
+				</BrowserRouter>
+			)}
 		</div>
 	);
 }

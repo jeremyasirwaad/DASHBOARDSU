@@ -82,6 +82,10 @@ export const TableFilter = () => {
 		<div>
 			<div className="navbarforedit">
 				<div className="editnavcontainer">
+					<div className="titledivfornav">
+						{/* <img className="logo" src={logo} alt="Logo" /> */}
+						<h2 style={{ marginBottom: "0px" }}>StartTalent</h2>
+					</div>
 					<i
 						class={
 							sidenavopen
@@ -118,8 +122,7 @@ export const TableFilter = () => {
 				<div className="innertabcont">
 					<MaterialTable
 						onRowClick={(event, rowData) => {
-							navigate(`/finished/false/${rowData.uuid}`)
-			
+							navigate(`/finished/false/${rowData.uuid}`);
 						}}
 						columns={[
 							{ title: "Name", field: "name" },
@@ -156,9 +159,9 @@ export const TableFilter = () => {
 								field: "interest",
 								lookup: {
 									Fullstack: "Fullstack",
-									DatascienceandAnalytics : "Datascience and Analytics",
+									DatascienceandAnalytics: "Datascience and Analytics",
 									Dataengineering: "Dataengineering",
-									DigitalMarketing: "DigitalMarketing"
+									DigitalMarketing: "DigitalMarketing",
 								},
 							},
 							{
@@ -170,19 +173,17 @@ export const TableFilter = () => {
 								customFilterAndSearch: (term, rowData) => {
 									// console.log(phone)
 									let callarray;
-									if(rowData.phone !== null && rowData.phone !== undefined)
-									{
+									if (rowData.phone !== null && rowData.phone !== undefined) {
 										callarray = Object.values(rowData.phone);
-									}	
+									}
 									// console.log(callarray);
 									let name1 = "";
 									let name2;
-									if(callarray !== undefined && callarray !== null)
-									{
-									callarray.map((e) => {
-										// console.log(e.name.concat(e.name));
-										name1 = name1 + e.name;
-									});
+									if (callarray !== undefined && callarray !== null) {
+										callarray.map((e) => {
+											// console.log(e.name.concat(e.name));
+											name1 = name1 + e.name;
+										});
 									}
 									// console.log(term.join(""));
 									// console.log(name1.toString());
@@ -193,7 +194,6 @@ export const TableFilter = () => {
 									} else {
 										return false;
 									}
-								
 								},
 								render: (phone) => {
 									if (phone.phone === null || phone.phone === undefined) {
@@ -223,6 +223,13 @@ export const TableFilter = () => {
 							filtering: true,
 							headerStyle: {
 								zIndex: 0,
+								backgroundColor: "#8a2be2",
+								color: "white",
+								fontFamily: "Rubik",
+								fontSize: "14px",
+							},
+							rowStyle: {
+								fontFamily: "Rubik",
 							},
 						}}
 						data={tabledata}
