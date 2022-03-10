@@ -175,7 +175,7 @@ export const Edit_Showmodal = () => {
 		<div>
 			<div className="navbarforedit">
 				<div className="editnavcontainer">
-				<div className="titledivfornav">
+					<div className="titledivfornav">
 						{/* <img className="logo" src={logo} alt="Logo" /> */}
 						<h2 style={{ marginBottom: "0px" }}>StartTalent</h2>
 					</div>
@@ -267,7 +267,7 @@ export const Edit_Showmodal = () => {
 									/>
 								</Worker>
 								{resume === "" ? (
-									<div className="noresumeconfig" style={{marginTop:'10px'}}>
+									<div className="noresumeconfig" style={{ marginTop: "10px" }}>
 										<input
 											type="file"
 											name="file"
@@ -309,7 +309,6 @@ export const Edit_Showmodal = () => {
 										Upload Choosen Resume - {progress}%
 									</label>
 								)}
-							
 							</div>
 						)}
 						<div className="detailsofprofile" style={{ marginTop: "30px" }}>
@@ -388,10 +387,12 @@ export const Edit_Showmodal = () => {
 										setInterest(e.target.value);
 									}}
 								>
-									<option value="FullStack">FullStack</option>
-									<option value="DataScience">Data Science</option>
-									<option value="DataEngineering">Data Engineering</option>
-									<option value="DataVisualization">Data Visualization</option>
+									<option value="Fullstack">FullStack</option>
+									<option value="Datascience&Analytics">
+										Data Science & Analytics
+									</option>
+									<option value="Dataengineering">Data Engineering</option>
+									<option value="DigitalMarketing">Data Marketing</option>
 								</select>
 							</div>
 							<div className="detaildiv">

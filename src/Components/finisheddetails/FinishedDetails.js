@@ -133,6 +133,28 @@ export const FinishedDetails = () => {
 			})
 		}
 
+
+		let departlist;
+		onValue(ref(db, "/departdata/depart"), (snapshot) => {
+			if(snapshot.val() !== null & snapshot.val() !==undefined)
+			{
+				departlist = snapshot.val();
+			}
+		})
+
+
+		if(departlist !== null && departlist !== undefined)
+		{
+			departlist = departlist.filter((e) => !e.includes((id + 1).slice(0,11)));
+			// console.log(batchlist1)
+			departlist.push( id.slice(0,11) + department);
+
+			update(ref(db, "/departdata"),{
+				depart: departlist 
+			})
+		}
+
+
 		update(ref(db, "/finished" + `/${id}`), {
 			name,
 			batch,
@@ -427,10 +449,10 @@ export const FinishedDetails = () => {
 										setInterest(e.target.value);
 									}}
 								>
-									<option value="FullStack">FullStack</option>
-									<option value="DataScience">Data Science</option>
-									<option value="DataEngineering">Data Engineering</option>
-									<option value="DataVisualization">Data Visualization</option>
+									<option value="Fullstack">FullStack</option>
+									<option value="Datascience&Analytics">Data Science & Analytics</option>
+									<option value="Dataengineering">Data Engineering</option>
+									<option value="DigitalMarketing">Data Marketing</option>
 								</select>
 							</div>
 							<div className="detaildiv">

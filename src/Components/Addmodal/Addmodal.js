@@ -117,7 +117,7 @@ export const Addmodal = forwardRef((props, refm) => {
 		setBatch(2023);
 		setComments("");
 		setContactno("+91");
-		setDepartment("");
+		setDepartment("IT");
 		setInterest("Fullstack");
 		setTypeofjob("Internship");
 		setWhatsappgrp("Nasscom");
@@ -205,9 +205,9 @@ export const Addmodal = forwardRef((props, refm) => {
 									<option value="CSE">CSE</option>
 									<option value="EEE">EEE</option>
 									<option value="ECE">ECE</option>
-									<option value="Mech">Mech</option>
-									<option value="Civil">Civil</option>
-									<option value="Prod">Prod</option>
+									<option value="MECH">Mech</option>
+									<option value="CIVIL">Civil</option>
+									<option value="PROD">Prod</option>
 									<option value="IBT">IBT</option>
 								</select>
 							</div>
@@ -232,7 +232,7 @@ export const Addmodal = forwardRef((props, refm) => {
 									}}
 								>
 									<option value="Fullstack">FullStack</option>
-									<option value="DatascienceandAnalytics">Data Science & Analytics</option>
+									<option value="Datascience&Analytics">Data Science & Analytics</option>
 									<option value="Dataengineering">Data Engineering</option>
 									<option value="DigitalMarketing">Data Marketing</option>
 								</select>

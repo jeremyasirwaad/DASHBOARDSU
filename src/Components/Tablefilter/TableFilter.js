@@ -19,6 +19,7 @@ export const TableFilter = () => {
 	const [dynamicobj, setdynamicobj] = useState([]);
 	const [dynamicobjcompname, setDynamicobjcompname] = useState([]);
 	const [dynamicobjcall, setDynamicobjcall] = useState([]);
+	const [dynamaicobjdepart, setDynamaicobjdepart] = useState([]);
 	const [muiTableKey, setMuiTableKey] = useState(0);
 
 	useEffect(() => {
@@ -61,6 +62,17 @@ export const TableFilter = () => {
 					return acc;
 				}, {});
 				setDynamicobjcall(obj);
+			}
+		});
+
+		onValue(ref(db, "/departdata"), (snapshot) => {
+			if (snapshot.val() !== null && snapshot.val() !== undefined) {
+				// setFake1(snapshot.val().year);
+				var obj = snapshot.val().depart.reduce(function (acc, cur, i) {
+					acc[cur.slice(11)] = cur.slice(11);
+					return acc;
+				}, {});
+				setDynamaicobjdepart(obj);
 			}
 		});
 
@@ -122,7 +134,6 @@ export const TableFilter = () => {
 				</div>
 				<div className="innertabcont">
 					<MaterialTable
-
 						onRowClick={(event, rowData) => {
 							navigate(`/finished/false/${rowData.uuid}`);
 						}}
@@ -131,16 +142,7 @@ export const TableFilter = () => {
 							{
 								title: "Department",
 								field: "department",
-								lookup: {
-									IT: "IT",
-									CSE: "CSE",
-									ECE: "ECE",
-									EEE: "EEE",
-									Mech: "Mech",
-									Civil: "Civil",
-									IBT: "IBT",
-									Prod: "Prod",
-								},
+								lookup: dynamaicobjdepart,
 							},
 							{
 								title: "Batch",
@@ -161,7 +163,7 @@ export const TableFilter = () => {
 								field: "interest",
 								lookup: {
 									Fullstack: "Fullstack",
-									DatascienceandAnalytics: "Datascience and Analytics",
+									"Datascience&Analytics": "Datascience & Analytics",
 									Dataengineering: "Dataengineering",
 									DigitalMarketing: "DigitalMarketing",
 								},
@@ -213,7 +215,7 @@ export const TableFilter = () => {
 								export: false,
 							},
 							{
-								title: "CompanyPlaced",
+								title: "Company Placed",
 								field: "placementCompany",
 								lookup: dynamicobjcompname,
 							},
@@ -229,26 +231,28 @@ export const TableFilter = () => {
 								color: "white",
 								fontFamily: "Rubik",
 								fontSize: "14px",
-							
 							},
 							rowStyle: {
 								fontFamily: "Rubik",
-								
 							},
 						}}
 						data={tabledata}
-						title= {<h4 style={{ marginTop: "20px" ,fontFamily: "Rubik" }}>Placement Data</h4>}
+						title={
+							<h4 style={{ marginTop: "20px", fontFamily: "Rubik" }}>
+								Placement Data
+							</h4>
+						}
 						key={muiTableKey}
 						actions={[
 							{
-							  icon: () => <i class="fa-solid fa-filter-circle-xmark"></i>,
-							  tooltip: "clear all filters",
-							  isFreeAction: true,
-							  onClick: (event) => {
-								setMuiTableKey(muiTableKey + 1); // set new key causing remount
-							  }
-							}
-						  ]}
+								icon: () => <i class="fa-solid fa-filter-circle-xmark"></i>,
+								tooltip: "clear all filters",
+								isFreeAction: true,
+								onClick: (event) => {
+									setMuiTableKey(muiTableKey + 1); // set new key causing remount
+								},
+							},
+						]}
 					/>
 				</div>
 			</div>

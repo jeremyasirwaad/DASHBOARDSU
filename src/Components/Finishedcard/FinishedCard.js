@@ -10,6 +10,7 @@ export const FinishedCard = ({name, department, interest, typeofjob, phone , com
         let snaps;
         let snapsyear;
         let snapscall;
+        let snapsdepart;
         onValue(ref(db, "/compnamedata/companylist"),(snapshot) => {
             if(snapshot.val() !== null && snapshot.val() !== undefined)
             {
@@ -31,6 +32,14 @@ export const FinishedCard = ({name, department, interest, typeofjob, phone , com
             }
         })
 
+        onValue(ref(db, "/departdata/depart"),(snapshot) => {
+            if(snapshot.val() !== null && snapshot.val() !== undefined)
+            {
+                snapsdepart = snapshot.val();
+            }
+        })
+
+
             let fillist;
             if(snaps !== undefined)
             {
@@ -46,6 +55,12 @@ export const FinishedCard = ({name, department, interest, typeofjob, phone , com
             {
                 fillcalllist = snapscall.filter((e) => !e.includes(id.slice(0,11)));
             }
+            let filldepartlist;
+            if(snapsdepart!== undefined)
+            {
+                filldepartlist = snapsdepart.filter((e) => !e.includes(id.slice(0,11)));
+            }
+            
             // console.log(fillcalllist)
             // console.log(snapscall)
             // console.log(id.slice(0,11));
@@ -59,6 +74,10 @@ export const FinishedCard = ({name, department, interest, typeofjob, phone , com
 
             update(ref(db, "/calldata"),{
                 calllist:fillcalllist
+            })
+
+            update(ref(db, "/departdata"),{
+                depart:filldepartlist
             })
         
         remove(ref(db, '/finished' + `/${id}`))

@@ -21,6 +21,7 @@ export const GotOffer = forwardRef((props, refm) => {
 	const [phonefornow, setPhonefornow] = useState({});
 	const [prevyear, setPrevyear] = useState([]);
 	const [comnameprev, setComnameprev] = useState([]);
+	const [departdatalist, setDepartdatalist] = useState([]);
 
 	useImperativeHandle(refm, () => {
 		return {
@@ -46,6 +47,15 @@ export const GotOffer = forwardRef((props, refm) => {
 				// console.log(snapshot.val().year)
 			}
 		})
+
+		onValue(ref(db,"/departdata"),(snapshot)=> {
+			if(snapshot.val() !== null && snapshot.val() !== undefined)
+			{
+				setDepartdatalist(snapshot.val().depart);
+				// console.log(snapshot.val().year)
+			}
+		})
+		
 			
 	},[])
 
@@ -96,6 +106,17 @@ export const GotOffer = forwardRef((props, refm) => {
 		update(ref(db, "/compnamedata"),{
 			companylist: uniqueCharslist
 		})
+
+		departdatalist.push( `${props.id}`  +  (props.data.department).toUpperCase());
+
+		let uniquedepartlist = departdatalist.filter((c, index) => {
+			return departdatalist.indexOf(c) === index;
+		});
+
+		update(ref(db, "/departdata"),{
+			depart: uniquedepartlist
+		})
+
 
 
 		const current = new Date();
