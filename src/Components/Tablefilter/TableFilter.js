@@ -19,6 +19,7 @@ export const TableFilter = () => {
 	const [dynamicobj, setdynamicobj] = useState([]);
 	const [dynamicobjcompname, setDynamicobjcompname] = useState([]);
 	const [dynamicobjcall, setDynamicobjcall] = useState([]);
+	const [muiTableKey, setMuiTableKey] = useState(0);
 
 	useEffect(() => {
 		onValue(ref(db, "/finished"), (snapshot) => {
@@ -121,6 +122,7 @@ export const TableFilter = () => {
 				</div>
 				<div className="innertabcont">
 					<MaterialTable
+
 						onRowClick={(event, rowData) => {
 							navigate(`/finished/false/${rowData.uuid}`);
 						}}
@@ -227,13 +229,26 @@ export const TableFilter = () => {
 								color: "white",
 								fontFamily: "Rubik",
 								fontSize: "14px",
+							
 							},
 							rowStyle: {
 								fontFamily: "Rubik",
+								
 							},
 						}}
 						data={tabledata}
-						title="Placement Data"
+						title= {<h4 style={{ marginTop: "20px" ,fontFamily: "Rubik" }}>Placement Data</h4>}
+						key={muiTableKey}
+						actions={[
+							{
+							  icon: () => <i class="fa-solid fa-filter-circle-xmark"></i>,
+							  tooltip: "clear all filters",
+							  isFreeAction: true,
+							  onClick: (event) => {
+								setMuiTableKey(muiTableKey + 1); // set new key causing remount
+							  }
+							}
+						  ]}
 					/>
 				</div>
 			</div>
