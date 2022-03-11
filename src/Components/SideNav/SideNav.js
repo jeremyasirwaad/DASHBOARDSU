@@ -56,8 +56,8 @@ export const SideNav = ({ sidenavstatus, toastmanager }) => {
 						</Link>
 						<span className={click ? "" : "none"}>Home</span>
 					</div>
-					<i class="fa-solid fa-minus sidenavcontainericons"></i>
-					<div className="navdiv navmargin">
+					{/* <i class="fa-solid fa-minus sidenavcontainericons"></i> */}
+					<div className="navdiv" style={{ marginBottom: "40px"  }}>
 						<Link to = "/search">
 							{" "}
 							<i class="fa-solid fa-magnifying-glass sidenavcontainericons"></i>
