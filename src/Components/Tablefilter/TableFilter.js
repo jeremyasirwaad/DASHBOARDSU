@@ -223,7 +223,10 @@ export const TableFilter = () => {
 						]}
 						options={{
 							search: false,
-							exportButton: true,
+							exportButton: {
+								pdf: true,
+								csv: true,
+							},
 							filtering: true,
 							headerStyle: {
 								zIndex: 0,
@@ -237,11 +240,7 @@ export const TableFilter = () => {
 							},
 						}}
 						data={tabledata}
-						title={
-							<h4 style={{ marginTop: "20px", fontFamily: "Rubik" }}>
-								Placement Data
-							</h4>
-						}
+						title={"Placement Data"}
 						key={muiTableKey}
 						actions={[
 							{
