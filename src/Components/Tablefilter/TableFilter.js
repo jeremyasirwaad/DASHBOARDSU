@@ -166,6 +166,8 @@ export const TableFilter = () => {
 									"Datascience&Analytics": "Datascience & Analytics",
 									Dataengineering: "Dataengineering",
 									DigitalMarketing: "DigitalMarketing",
+									IOT:"IOT",
+									Blockchain: "Block Chain"
 								},
 							},
 							{

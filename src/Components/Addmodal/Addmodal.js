@@ -209,6 +209,8 @@ export const Addmodal = forwardRef((props, refm) => {
 									<option value="CIVIL">Civil</option>
 									<option value="PROD">Prod</option>
 									<option value="IBT">IBT</option>
+									<option value="EIE">EIE</option>
+									<option value="ME">ME</option>
 								</select>
 							</div>
 						</div>
@@ -235,6 +237,8 @@ export const Addmodal = forwardRef((props, refm) => {
 									<option value="Datascience&Analytics">Data Science & Analytics</option>
 									<option value="Dataengineering">Data Engineering</option>
 									<option value="DigitalMarketing">Data Marketing</option>
+									<option value="IOT">IOT</option>
+									<option value="Blockchain">Block Chain</option>
 								</select>
 							</div>
 						</div>
