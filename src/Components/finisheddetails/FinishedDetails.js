@@ -453,6 +453,8 @@ export const FinishedDetails = () => {
 									<option value="Datascience&Analytics">Data Science & Analytics</option>
 									<option value="Dataengineering">Data Engineering</option>
 									<option value="DigitalMarketing">Data Marketing</option>
+									<option value="IOT">IOT</option>
+									<option value="Blockchain">Block Chain</option>
 								</select>
 							</div>
 							<div className="detaildiv">
