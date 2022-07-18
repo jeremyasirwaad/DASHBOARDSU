@@ -32,4 +32,18 @@ Your app is ready to be deployed!
 
 ## Screenshots
 
+HOMEPAGE
 
+![This is an image](https://firebasestorage.googleapis.com/v0/b/startup-st.appspot.com/o/Screenshot%202022-07-18%20at%2011.24.10%20AM.png?alt=media&token=9957ec70-c16c-4f67-a2f1-21140787a575)
+
+SEARCH 
+
+![This is an image](https://firebasestorage.googleapis.com/v0/b/startup-st.appspot.com/o/Screenshot%202022-07-18%20at%2011.24.45%20AM.png?alt=media&token=2c2f089b-5159-4867-a1f4-23a68844a896)
+
+PROFILE
+
+![This is an image](https://firebasestorage.googleapis.com/v0/b/startup-st.appspot.com/o/Screenshot%202022-07-18%20at%2011.25.17%20AM.png?alt=media&token=041dd4e2-8ebb-463b-9653-62f6db1c8c8d)
+
+TABLE
+
+![This is an image](https://firebasestorage.googleapis.com/v0/b/startup-st.appspot.com/o/Screenshot%202022-07-18%20at%2011.25.35%20AM.png?alt=media&token=16d1c1d1-9fce-492d-972e-f15cfabe1a8f)
